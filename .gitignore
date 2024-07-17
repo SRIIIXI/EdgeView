@@ -23,6 +23,7 @@
 *.idb
 *.iobj
 *.exp
+*.jar
 *~
 *-stamp
 .*.swp
