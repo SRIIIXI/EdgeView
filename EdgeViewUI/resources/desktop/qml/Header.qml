@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Controls.Basic 2.3
+import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.15
 
 Rectangle
@@ -21,8 +21,6 @@ Rectangle
     property double fontSizeBig: fontlabel.font.pointSize +  2.5
     property double fontSizeLarge: fontlabel.font.pointSize + 5.0
 
-    signal menuButtonClicked();
-
     Component.onCompleted:
     {
         fontSizeNormal = fontlabel.font.pointSize
@@ -31,8 +29,7 @@ Rectangle
         fontSizeBig = fontlabel.font.pointSize +  2.5
         fontSizeLarge = fontlabel.font.pointSize + 5.0
 
-        progressAnimator.visible = false
-        connectionStatusIcon.visible = false
+        progressAnimator.visible = true
     }
 
     Label
@@ -48,32 +45,36 @@ Rectangle
         height: headerID.height * 0.6
         color: applicationData.Theme.BackgroundColor
 
+        Label
+        {
+            text: headerTitle
+            font.bold: false
+            color: applicationData.Theme.FontColor
+            elide: Label.ElideRight
+            verticalAlignment: Qt.AlignVCenter
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 20
+            font.pointSize: fontSizeBig
+        }
+
         ToolButton
         {
-            id: backBtnID            
+            id: backBtnID
             anchors.verticalCenter: parent.verticalCenter
+            anchors.right: parent.right
             height: titleRect.height
             width: titleRect.height
             visible: isMenuButtonVisible
 
-            onClicked:
-            {
-                menuButtonClicked();
-            }
-
-            action:
-            {
-                openMenuAction
-            }
-
             icon.source :
             if(applicationData.IsDarkTheme === true)
             {
-                return "../images/MenuWhite.png";
+                return "../images/User.png";
             }
             else
             {
-                return "../images/MenuBlack.png";
+                return "../images/User.png";
             }
 
             icon.color: "transparent"
@@ -84,19 +85,6 @@ Rectangle
             {
                 color: applicationData.Theme.BackgroundColor
             }
-        }
-
-        Label
-        {
-            text: headerTitle
-            font.bold: true
-            color: applicationData.Theme.FontColor
-            elide: Label.ElideRight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pointSize: fontSizeBig
         }
     }
 
@@ -117,21 +105,10 @@ Rectangle
             anchors.horizontalCenter: parent.horizontalCenter
             color: applicationData.Theme.BackgroundColor
 
-            Image
-            {
-                id: connectionStatusIcon
-                height: infoRectInterior.height*0.6
-                width: infoRectInterior.height*0.6
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                source : "../images/GreenDot.png"
-                visible: isConnectionIndicatorVisible
-            }
-
             Text
             {
                 color: applicationData.Theme.FontColor
-                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 text: applicationData.CurrentDeviceAddress
                 font.pointSize: fontSizeSmall
@@ -147,6 +124,19 @@ Rectangle
                 anchors.right: infoRectInterior.right
                 anchors.rightMargin: 0
                 running: true
+
+                Material.accent: applicationData.Theme.AccentColor
+                Material.theme:
+                {
+                    if(applicationData.IsDarkTheme === true)
+                    {
+                        return Material.Dark;
+                    }
+                    else
+                    {
+                        return Material.Light;
+                    }
+                }
             }
         }
     }
@@ -163,16 +153,6 @@ Rectangle
         function onProgressIndicatorsOn()
         {
             progressAnimator.visible = true;
-        }
-
-        function onNetworkIndicatorsOff()
-        {
-            connectionStatusIcon.visible = false
-        }
-
-        function onNetworkIndicatorsOn()
-        {
-            connectionStatusIcon.visible = true
         }
     }
 }

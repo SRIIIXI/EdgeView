@@ -135,6 +135,7 @@ signals:
     void DeviceListChanged();
 
     //UI events and operations states
+    void menuAction();
     void deviceAction();
     void deviceMessage(bool fl, QString str);
     void pageAction(int ipage);

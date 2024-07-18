@@ -2,24 +2,27 @@
     <qresource prefix="/">
         <file>qml/Header.qml</file>
         <file>qml/MainWindow.qml</file>
-        <file>qml/ConnectionTest.qml</file>
-        <file>qml/ScanningTest.qml</file>
-        <file>qml/Trace.qml</file>
         <file>qml/Home.qml</file>
         <file>qml/CustomButton.qml</file>
 
-        <file>images/MenuWhite.png</file>
-        <file>images/MenuBlack.png</file>
+        <file>images/Device.png</file>
+        <file>images/Site.png</file>
+        <file>images/Area.png</file>
+        <file>images/Enterprise.png</file>
+        <file>images/Asset.png</file>
+        <file>images/Role.png</file>
+        <file>images/Rule.png</file>
+        <file>images/User.png</file>
+        <file>images/Alarm.png</file>
+        <file>images/Telemetry.png</file>
+                                                        
         <file>images/GreenDot.png</file>
         <file>images/Home.png</file>
-        <file>images/Scan.png</file>
-        <file>images/Connect.png</file>
-        <file>images/DeviceWhite.png</file>
-        <file>images/DeviceBlack.png</file>
-        <file>images/Trace.png</file>
         <file>images/Exit.png</file>
         <file>images/Pass.png</file>
         <file>images/Fail.png</file>
         <file>images/Done.png</file>
+        
+        <file>images/EdgeView.png</file>
     </qresource>
 </RCC>

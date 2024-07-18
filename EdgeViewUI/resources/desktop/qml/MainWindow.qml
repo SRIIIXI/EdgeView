@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Controls.Basic 2.3
+import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 
 ApplicationWindow
@@ -18,6 +18,8 @@ ApplicationWindow
     property string oldPage: ""
     property bool isClosing: false
 
+    property variant menuModel :  []
+
     onClosing:
     {
         close.accepted = isClosing;
@@ -26,6 +28,7 @@ ApplicationWindow
     Component.onCompleted:
     {
         stackView.push("Home.qml")
+        menuModel = applicationData.Menu
     }
 
     Rectangle
@@ -33,9 +36,19 @@ ApplicationWindow
         id: brandingArea
         height: applicationData.Theme.BarHeight * 2
         width: 220
-        color: "green"
+        color: applicationData.Theme.BackgroundColor
         anchors.top: parent.top
         anchors.left: parent.left
+
+        Image
+        {
+            id: appLogo
+            source: "../images/EdgeView.png"
+            height: parent.height * 0.9
+            width: parent.height * 0.9
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
     }
 
     Header
@@ -45,6 +58,7 @@ ApplicationWindow
         width: parent.width -  brandingArea.width
         anchors.top: parent.top
         anchors.right: parent.right
+        headerTitle: "Edge Manager"
     }
 
     Rectangle
@@ -52,198 +66,130 @@ ApplicationWindow
         id: menuArea
         height: parent.height - applicationData.Theme.BarHeight * 2
         width: 220
-        color: "lightgreen"
         anchors.bottom: parent.bottom
         anchors.left: parent.left
+        color: applicationData.Theme.BackgroundColor
+
+        ListView
+        {
+            id: menuListView
+            height: parent.height*0.95 - applicationData.Theme.BarHeight
+            width: parent.width*0.96
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.horizontalCenter: parent.horizontalCenter
+            visible: true
+            spacing: 5
+            clip: true
+            model: menuModel
+            delegate: menuDelegate
+        }
+
+        Component
+        {
+            id: menuDelegate
+
+            Rectangle
+            {
+                id: menuItem
+                width: menuListView.width
+                height: applicationData.Theme.BarHeight*0.9
+                radius: 5
+                color: applicationData.Theme.ControlColor
+                border.color: applicationData.Theme.ControlLowColor
+
+                Image
+                {
+                    id: menuImg
+                    source: menuModel[index].ItemIcon
+                    width: menuItem.height*0.65
+                    height: menuItem.height*0.65
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors
+                    {
+                        left: parent.left
+                        leftMargin:  10
+                    }
+                }
+
+                Label
+                {
+                    id:menuNamelbl
+                    font.pointSize: headerPanel.fontSizeSmall
+                    color: applicationData.Theme.FontColor
+                    elide: Label.ElideRight
+                    horizontalAlignment: Qt.AlignHCenter
+                    verticalAlignment: Qt.AlignVCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors
+                    {
+                        left: menuImg.right
+                        leftMargin: 30
+                    }
+                    text: menuModel[index].ItemName
+                }
+            }
+        }
+
+        RoundButton
+        {
+            id: exitButton
+            height: applicationData.Theme.BarHeight
+            width: applicationData.Theme.BarHeight
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            Image
+            {
+                id: exitButtonImg
+                source: "../images/Exit.png"
+                width: exitButton.height*0.5
+                height: exitButton.height*0.5
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+            }
+        }
     }
 
     StackView
     {
         id: stackView
-        height: parent.height - applicationData.Theme.BarHeight * 2
-        width: parent.width -  menuArea.width
+        height: parent.height - applicationData.Theme.BarHeight * 2 - 2
+        width: parent.width -  menuArea.width - 2
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }
 
-    /*
-    Action
+    Rectangle
     {
-        id: navigateMenuAction
-        icon.name: stackView.depth > 1 ? "back" : "drawer"
-        onTriggered:
-        {
-            if (stackView.depth > 1)
-            {
-                stackView.pop()
-            }
-            else
-            {
-                drawer.open()
-            }
-        }
+        id: horizontalBorder
+        height: 1
+        width: mainView.width
+        anchors.top: brandingArea.bottom
+        anchors.left: mainView.left
+        radius: 0
+        color: applicationData.Theme.ControlLowColor
     }
 
-    Action
+    Rectangle
     {
-        id: openMenuAction
-        icon.name: stackView.depth > 1 ? "back" : "drawer"
-        onTriggered:
-        {
-            drawer.open()
-        }
-    }
-
-    Action
-    {
-        id: navigateScanDevices
-        icon.name: stackView.depth
-        onTriggered:
-        {
-            applicationData.invokeSaveCurrentPage("ScanningTest.qml")
-            stackView.pop()
-            stackView.push("ScanningTest.qml")
-        }
-    }
-
-    Action
-    {
-        id: navigateConnectDevices
-        icon.name: stackView.depth
-        onTriggered:
-        {
-            applicationData.invokeSaveCurrentPage("ConnectionTest.qml")
-            stackView.pop()
-            stackView.push("ConnectionTest.qml")
-        }
-    }
-
-    Drawer
-    {
-        id: drawer
-        width: 200 //mainView.width * 0.75
+        id: verticalBorder
         height: mainView.height
-
-        Column
-        {
-            anchors.fill: parent
-
-            ItemDelegate
-            {
-                text: qsTr("Home")
-                width: parent.width
-
-                onClicked:
-                {                   
-                    drawer.close()
-                    applicationData.invokeSaveCurrentPage("Home.qml")
-                    stackView.pop()
-                    stackView.push("Home.qml")
-                }
-
-                icon
-                {
-                    source: "../images/Home.png"
-                    width: iconWidth
-                    height: iconHeight
-                }
-
-                enabled:
-                {
-                    if(applicationData.CurrentMeterSerialNo === "")
-                    {
-                        return false
-                    }
-
-                    return true
-                }
-            }
-
-            ItemDelegate
-            {
-                text: qsTr("Scanning Test")
-                width: parent.width
-                onClicked:
-                {
-                    applicationData.invokeSaveCurrentPage("ScanningTest.qml")
-                    stackView.pop()
-                    stackView.push("ScanningTest.qml")
-                    drawer.close()
-                }
-
-                icon
-                {
-                    source: "../images/Scan.png"
-                    width: iconWidth
-                    height: iconHeight
-                }
-            }
-
-            ItemDelegate
-            {
-                text: qsTr("Connection Test")
-                width: parent.width
-                onClicked:
-                {
-                    applicationData.invokeSaveCurrentPage("ConnectionTest.qml")
-                    stackView.pop()
-                    stackView.push("ConnectionTest.qml")
-                    drawer.close()
-                }
-
-                icon
-                {
-                    source: "../images/Connect.png"
-                    width: iconWidth
-                    height: iconHeight
-                }
-            }
-
-            ItemDelegate
-            {
-                text: qsTr("Trace")
-                width: parent.width
-                onClicked:
-                {
-                    applicationData.invokeSaveCurrentPage("Trace.qml")
-                    stackView.pop()
-                    stackView.push("Trace.qml")
-                    drawer.close()
-                }
-
-                icon
-                {
-                    source: "../images/Trace.png"
-                    width: iconWidth
-                    height: iconHeight
-                }
-            }
-
-            ItemDelegate
-            {
-                text: qsTr("Exit")
-                width: parent.width
-                onClicked:
-                {
-                    isClosing = true;
-                    drawer.close();
-                    applicationData.invokeExit();
-                }
-
-                icon
-                {
-                    source: "../images/Exit.png"
-                    width: iconWidth
-                    height: iconHeight
-                }
-            }
-        }
+        width: 1
+        anchors.top: mainView.top
+        anchors.left: brandingArea.right
+        radius: 0
+        color: applicationData.Theme.ControlLowColor
     }
-    */
 
     Connections
     {
         target: applicationData
+
+        function onMenuAction()
+        {
+            menuModel = applicationData.Menu
+        }
 
         function onPageAction(pg)
         {

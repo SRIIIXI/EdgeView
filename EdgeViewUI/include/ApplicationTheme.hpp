@@ -92,24 +92,24 @@ public:
     void EnableDarkMode()
     {
         IsDarkMode_ = true;
-        FontColor_ = "white";
-        AccentColor_ = "dodgerblue";
-        AccentLowColor_ = "deepskyblue";
-        BackgroundColor_ = "black";
+        FontColor_ = "#ffffff";
+        AccentColor_ = "#1e90ff";
+        AccentLowColor_ = "#00bfff";
+        BackgroundColor_ = "#000000";
         ControlColor_ = "#1C2833";
-        ControlLowColor_ = "darkcyan";
+        ControlLowColor_ = "#2f4f4f";
         BarHeight_ = 50;
     }
 
     void EnableLightMode()
     {
         IsDarkMode_ = false;
-        FontColor_ = "black";
-        AccentColor_ = "dodgerblue";
-        AccentLowColor_ = "deepskyblue";
-        BackgroundColor_ = "white";
-        ControlColor_ = "whitesmoke";
-        ControlLowColor_ = "silver";
+        FontColor_ = "#000000";
+        AccentColor_ = "#1e90ff";
+        AccentLowColor_ = "#00bfff";
+        BackgroundColor_ = "#ffffff";
+        ControlColor_ = "#f5f5f5";
+        ControlLowColor_ = "#c0c0c0";
         BarHeight_ = 50;
     }
 };
