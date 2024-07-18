@@ -76,6 +76,11 @@ ApplicationTheme Controller::getTheme()
     return theme_;
 }
 
+QList<ApplicationMenu> Controller::getMenu()
+{
+    return menuItemList_;
+}
+
 void Controller::Trace(QString str)
 {
     str = QDateTime::currentDateTime().toString("yy-MM-dd hh:mm:ss ") + str + "\n";

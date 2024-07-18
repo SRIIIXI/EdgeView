@@ -8,7 +8,6 @@
         <file>qml/Home.qml</file>
         <file>qml/CustomButton.qml</file>
 
-        <file>images/BLE.png</file>        
         <file>images/MenuWhite.png</file>
         <file>images/MenuBlack.png</file>
         <file>images/GreenDot.png</file>

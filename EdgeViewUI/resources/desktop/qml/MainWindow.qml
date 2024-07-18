@@ -10,8 +10,8 @@ ApplicationWindow
     objectName: "mainViewID"
     visible: true
 
-    minimumHeight: 680
-    minimumWidth: 320
+    minimumHeight: 768
+    minimumWidth: 1024
 
     property int iconHeight : width*0.075
     property int iconWidth : width*0.075
@@ -28,6 +28,45 @@ ApplicationWindow
         stackView.push("Home.qml")
     }
 
+    Rectangle
+    {
+        id: brandingArea
+        height: applicationData.Theme.BarHeight * 2
+        width: 220
+        color: "green"
+        anchors.top: parent.top
+        anchors.left: parent.left
+    }
+
+    Header
+    {
+        id: headerPanel
+        height: applicationData.Theme.BarHeight * 2
+        width: parent.width -  brandingArea.width
+        anchors.top: parent.top
+        anchors.right: parent.right
+    }
+
+    Rectangle
+    {
+        id: menuArea
+        height: parent.height - applicationData.Theme.BarHeight * 2
+        width: 220
+        color: "lightgreen"
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+    }
+
+    StackView
+    {
+        id: stackView
+        height: parent.height - applicationData.Theme.BarHeight * 2
+        width: parent.width -  menuArea.width
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+    }
+
+    /*
     Action
     {
         id: navigateMenuAction
@@ -82,7 +121,7 @@ ApplicationWindow
     Drawer
     {
         id: drawer
-        width: mainView.width * 0.75
+        width: 200 //mainView.width * 0.75
         height: mainView.height
 
         Column
@@ -200,15 +239,7 @@ ApplicationWindow
             }
         }
     }
-
-    StackView
-    {
-        id: stackView
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-    }
+    */
 
     Connections
     {

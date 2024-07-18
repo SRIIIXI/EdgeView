@@ -5,7 +5,7 @@
 
 int main(int argc, char *argv[])
 {
-    Q_INIT_RESOURCE(EdgeView);
+    Q_INIT_RESOURCE(EdgeViewUI);
 
     const QUrl urlMain("qrc:///qml/MainWindow.qml");
     EdgeViewApplication  app(argc, argv);

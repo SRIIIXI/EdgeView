@@ -12,6 +12,7 @@
 #include <QPalette>
 
 #include "ApplicationTheme.hpp"
+#include "ApplicationMenu.hpp"
 
 class Device
 {
@@ -107,6 +108,9 @@ public:
     Q_PROPERTY (ApplicationTheme Theme READ getTheme NOTIFY ThemeChanged)
     ApplicationTheme getTheme();
 
+    Q_PROPERTY (QList<ApplicationMenu> Menu READ getMenu NOTIFY MenuChanged)
+    QList<ApplicationMenu> getMenu();
+
     Q_PROPERTY (QString TraceString READ getTraceString NOTIFY TraceStringChanged)
     QString getTraceString();
 
@@ -121,6 +125,7 @@ public:
 
 signals:
     void ThemeChanged();
+    void MenuChanged();
     void ShowIndicatorChanged();
     void IsDarkThemeChanged();
     void IsTraceEnabledChanged();
@@ -156,6 +161,7 @@ private:
 
     //Object lists
     QList<Device> deviceList_;
+    QList<ApplicationMenu> menuItemList_;
     QMap<QString, Device> deviceMap_;
 
     //Globals / Miscellanous

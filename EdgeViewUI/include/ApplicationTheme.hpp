@@ -15,18 +15,24 @@ public:
 public:
     QString AccentColor_;
 public:
-    QString AccentColorLow_;
+    QString AccentLowColor_;
 public:
     QString BackgroundColor_;
 public:
     QString ControlColor_;
 public:
+    QString ControlLowColor_;
+public:
+    uint32_t BarHeight_;
+public:
     Q_PROPERTY(bool IsDarkMode MEMBER IsDarkMode_)
     Q_PROPERTY(QString FontColor MEMBER FontColor_)
     Q_PROPERTY(QString AccentColor MEMBER AccentColor_)
-    Q_PROPERTY(QString AccentColorLow MEMBER AccentColorLow_)
+    Q_PROPERTY(QString AccentLowColor MEMBER AccentLowColor_)
     Q_PROPERTY(QString BackgroundColor MEMBER BackgroundColor_)
     Q_PROPERTY(QString ControlColor MEMBER ControlColor_)
+    Q_PROPERTY(QString ControlLowColor MEMBER ControlLowColor_)
+    Q_PROPERTY(uint32_t BarHeight MEMBER BarHeight_)
 
 public:
     ~ApplicationTheme()
@@ -39,14 +45,23 @@ public:
 
     }
 
-    ApplicationTheme(bool iIsDarkMode, QString iFontColor, QString iAccentColor, QString iAccentColorLow, QString iBackgroundColor, QString iControlColor)
+    ApplicationTheme(bool iIsDarkMode,
+                     QString iFontColor,
+                     QString iAccentColor,
+                     QString iAccentLowColor,
+                     QString iBackgroundColor,
+                     QString iControlColor,
+                     QString iControlLowColor,
+                     uint32_t iBarHeight)
     {
         IsDarkMode_ = iIsDarkMode;
         FontColor_ = iFontColor;
         AccentColor_ = iAccentColor;
-        AccentColorLow_ = iAccentColorLow;
+        AccentLowColor_ = iAccentLowColor;
         BackgroundColor_ = iBackgroundColor;
         ControlColor_ = iControlColor;
+        ControlLowColor_ = iControlLowColor;
+        BarHeight_ = iBarHeight;
     }
 
     ApplicationTheme(const ApplicationTheme& other)
@@ -54,9 +69,11 @@ public:
         IsDarkMode_ = other.IsDarkMode_;
         FontColor_ = other.FontColor_;
         AccentColor_ = other.AccentColor_;
-        AccentColorLow_ = other.AccentColorLow_;
+        AccentLowColor_ = other.AccentLowColor_;
         BackgroundColor_ = other.BackgroundColor_;
         ControlColor_ = other.ControlColor_;
+        ControlLowColor_ = other.ControlLowColor_;
+        BarHeight_ = other.BarHeight_;
     }
 
     ApplicationTheme& operator = (const ApplicationTheme& other)
@@ -64,9 +81,11 @@ public:
         IsDarkMode_ = other.IsDarkMode_;
         FontColor_ = other.FontColor_;
         AccentColor_ = other.AccentColor_;
-        AccentColorLow_ = other.AccentColorLow_;
+        AccentLowColor_ = other.AccentLowColor_;
         BackgroundColor_ = other.BackgroundColor_;
         ControlColor_ = other.ControlColor_;
+        ControlLowColor_ = other.ControlLowColor_;
+        BarHeight_ = other.BarHeight_;
         return *this;
     }
 
@@ -74,20 +93,24 @@ public:
     {
         IsDarkMode_ = true;
         FontColor_ = "white";
-        AccentColor_ = "#1e90ff";
-        AccentColorLow_ = "#e0e0e0";
+        AccentColor_ = "dodgerblue";
+        AccentLowColor_ = "deepskyblue";
         BackgroundColor_ = "black";
         ControlColor_ = "#1C2833";
+        ControlLowColor_ = "darkcyan";
+        BarHeight_ = 50;
     }
 
     void EnableLightMode()
     {
         IsDarkMode_ = false;
         FontColor_ = "black";
-        AccentColor_ = "#1e90ff";
-        AccentColorLow_ = "#e0e0e0";
+        AccentColor_ = "dodgerblue";
+        AccentLowColor_ = "deepskyblue";
         BackgroundColor_ = "white";
         ControlColor_ = "whitesmoke";
+        ControlLowColor_ = "silver";
+        BarHeight_ = 50;
     }
 };
 

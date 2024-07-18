@@ -52,27 +52,28 @@ set(HEADERS
 ${HEADERS}
 ${HEADER_DIR}/EdgeView.hpp
 ${HEADER_DIR}/ApplicationTheme.hpp
+${HEADER_DIR}/ApplicationMenu.hpp
 ${HEADER_DIR}/Controller.hpp
 )
 
 if(IOS)
-set(RESOURCE_FILE ./resources/ios/EdgeView.qrc)
+set(RESOURCE_FILE ./resources/mobile/EdgeViewUI.qrc)
 endif(IOS)
 
 if(MACOS)
-set(RESOURCE_FILE ./resources/macos/EdgeView.qrc)
+set(RESOURCE_FILE ./resources/desktop/EdgeViewUI.qrc)
 endif(MACOS)
 
 if(WIN32)
-set(RESOURCE_FILE ./resources/windows/EdgeView.qrc)
+set(RESOURCE_FILE ./resources/desktop/EdgeViewUI.qrc)
 endif(WIN32)
 
 if(ANDROID_LINUX)
-set(RESOURCE_FILE ./resources/android/EdgeView.qrc)
+set(RESOURCE_FILE ./resources/mobile/EdgeViewUI.qrc)
 endif(ANDROID_LINUX)
 
 if(GNU_LINUX)
-set(RESOURCE_FILE ./resources/linux/EdgeView.qrc)
+set(RESOURCE_FILE ./resources/desktop/EdgeViewUI.qrc)
 endif(GNU_LINUX)
 
 qt_add_executable(${Project} ${DLMS_SOURCES} ${DLMS_HEADERS} ${SOURCES} ${HEADERS} ${RESOURCE_FILE})
