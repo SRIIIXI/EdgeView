@@ -70,11 +70,11 @@ Rectangle
             icon.source :
             if(applicationData.IsDarkTheme === true)
             {
-                return "../images/User.png";
+                return "../images/Users.png";
             }
             else
             {
-                return "../images/User.png";
+                return "../images/Users.png";
             }
 
             icon.color: "transparent"

@@ -23,7 +23,7 @@ Page
         Label
         {
            id: dummy
-           text: "Home"
+           text: "Rules"
            anchors.horizontalCenter: parent.horizontalCenter
            anchors.verticalCenter: parent.verticalCenter
            color: applicationData.Theme.FontColor

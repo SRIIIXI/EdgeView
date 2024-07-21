@@ -24,17 +24,17 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
     isDarkTheme_ = false;
     theme_.EnableLightMode();
 
-    menuItemList_.append(ApplicationMenu(true, "Home", "Enterprises.qml", "../images/Home.png"));
-    menuItemList_.append(ApplicationMenu(true, "Enterprises", "Enterprises.qml", "../images/Enterprise.png"));
-    menuItemList_.append(ApplicationMenu(true, "Sites", "Sites.qml", "../images/Site.png"));
-    menuItemList_.append(ApplicationMenu(true, "Areas", "Sites.qml", "../images/Area.png"));
-    menuItemList_.append(ApplicationMenu(true, "Devices", "Devices.qml", "../images/Device.png"));
-    menuItemList_.append(ApplicationMenu(true, "Assets", "Devices.qml", "../images/Asset.png"));
-    menuItemList_.append(ApplicationMenu(true, "Rules", "Devices.qml", "../images/Rule.png"));
-    menuItemList_.append(ApplicationMenu(true, "Users", "Devices.qml", "../images/User.png"));
-    menuItemList_.append(ApplicationMenu(true, "Roles", "Devices.qml", "../images/Role.png"));
-    menuItemList_.append(ApplicationMenu(true, "Telemetry", "Devices.qml", "../images/Telemetry.png"));
-    menuItemList_.append(ApplicationMenu(true, "Alarms", "Devices.qml", "../images/Alarm.png"));
+    menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/Home.png"));
+    menuItemList_.append(ApplicationMenu(true, "Enterprises", "Enterprises.qml", "../images/Enterprises.png"));
+    menuItemList_.append(ApplicationMenu(true, "Sites", "Sites.qml", "../images/Sites.png"));
+    menuItemList_.append(ApplicationMenu(true, "Areas", "Areas.qml", "../images/Areas.png"));
+    menuItemList_.append(ApplicationMenu(true, "Devices", "Devices.qml", "../images/Devices.png"));
+    menuItemList_.append(ApplicationMenu(true, "Assets", "Assets.qml", "../images/Assets.png"));
+    menuItemList_.append(ApplicationMenu(true, "Rules", "Rules.qml", "../images/Rules.png"));
+    menuItemList_.append(ApplicationMenu(true, "Roles", "Roles.qml", "../images/Roles.png"));
+    menuItemList_.append(ApplicationMenu(true, "Users", "Users.qml", "../images/Users.png"));
+    menuItemList_.append(ApplicationMenu(true, "Telemetry", "Telemetry.qml", "../images/Telemetry.png"));
+    menuItemList_.append(ApplicationMenu(true, "Alarms", "Alarms.qml", "../images/Alarms.png"));
 
     currentDeviceAddress_ = "Sites : Update";
 }

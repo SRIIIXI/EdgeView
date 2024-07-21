@@ -1,19 +1,33 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/Header.qml</file>
-        <file>qml/MainWindow.qml</file>
-        <file>qml/Home.qml</file>
-        <file>qml/CustomButton.qml</file>
+		<file>qml/Header.qml</file>
+		<file>qml/MainWindow.qml</file>
 
-        <file>images/Device.png</file>
-        <file>images/Site.png</file>
-        <file>images/Area.png</file>
-        <file>images/Enterprise.png</file>
-        <file>images/Asset.png</file>
-        <file>images/Role.png</file>
-        <file>images/Rule.png</file>
-        <file>images/User.png</file>
-        <file>images/Alarm.png</file>
+		<file>qml/CustomButton.qml</file>
+		<file>qml/CustomTable.qml</file>
+		<file>qml/CustomScrollBar.qml</file>
+
+		<file>qml/Home.qml</file>        
+		<file>qml/Devices.qml</file>
+		<file>qml/Assets.qml</file>
+		<file>qml/Sites.qml</file>
+		<file>qml/Areas.qml</file>
+		<file>qml/Enterprises.qml</file>
+		<file>qml/Roles.qml</file>
+		<file>qml/Rules.qml</file>
+		<file>qml/Telemetry.qml</file>
+		<file>qml/Alarms.qml</file>
+		<file>qml/Users.qml</file>
+
+        <file>images/Devices.png</file>
+        <file>images/Sites.png</file>
+        <file>images/Areas.png</file>
+        <file>images/Enterprises.png</file>
+        <file>images/Assets.png</file>
+        <file>images/Roles.png</file>
+        <file>images/Rules.png</file>
+        <file>images/Users.png</file>
+        <file>images/Alarms.png</file>
         <file>images/Telemetry.png</file>
                                                         
         <file>images/GreenDot.png</file>

@@ -83,6 +83,11 @@ ApplicationWindow
             clip: true
             model: menuModel
             delegate: menuDelegate
+
+            onCurrentIndexChanged:
+            {
+                applicationData.invokeChangePage(currentIndex);
+            }
         }
 
         Component
@@ -97,6 +102,15 @@ ApplicationWindow
                 radius: 5
                 color: applicationData.Theme.ControlColor
                 border.color: applicationData.Theme.ControlLowColor
+
+                MouseArea
+                {
+                    anchors.fill: parent
+                    onClicked:
+                    {
+                        menuListView.currentIndex = index
+                    }
+                }
 
                 Image
                 {
@@ -126,7 +140,17 @@ ApplicationWindow
                         left: menuImg.right
                         leftMargin: 30
                     }
+
                     text: menuModel[index].ItemName
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        onClicked:
+                        {
+                            menuListView.currentIndex = index
+                        }
+                    }
                 }
             }
         }
@@ -147,6 +171,10 @@ ApplicationWindow
                 height: exitButton.height*0.5
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
+            }
+            onClicked:
+            {
+                applicationData.invokeExit();
             }
         }
     }
@@ -196,30 +224,78 @@ ApplicationWindow
             if(pg === 0)
             {
                 stackView.pop();
-                oldPage = applicationData.invokeRetreiveLastPage()
-                applicationData.invokeSaveCurrentPage(oldPage)
-                stackView.push(oldPage);
+                applicationData.invokeSaveCurrentPage("Home.qml")
+                stackView.push("Home.qml");
             }
 
             if(pg === 1)
             {
                 stackView.pop();
-                applicationData.invokeSaveCurrentPage("ScanningTest.qml")
-                stackView.push("ScanningTest.qml");
+                applicationData.invokeSaveCurrentPage("Enterprises.qml")
+                stackView.push("Enterprises.qml");
             }
 
             if(pg === 2)
             {
                 stackView.pop();
-                applicationData.invokeSaveCurrentPage("ConnectionTest.qml")
-                stackView.push("ConnectionTest.qml");
+                applicationData.invokeSaveCurrentPage("Sites.qml")
+                stackView.push("Sites.qml");
             }
 
             if(pg === 3)
             {
                 stackView.pop();
-                applicationData.invokeSaveCurrentPage("Trace.qml")
-                stackView.push("Trace.qml");
+                applicationData.invokeSaveCurrentPage("Areas.qml")
+                stackView.push("Areas.qml");
+            }
+
+            if(pg === 4)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Devices.qml")
+                stackView.push("Devices.qml");
+            }
+
+            if(pg === 5)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Assets.qml")
+                stackView.push("Assets.qml");
+            }
+
+            if(pg === 6)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Rules.qml")
+                stackView.push("Rules.qml");
+            }
+
+            if(pg === 7)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Roles.qml")
+                stackView.push("Roles.qml");
+            }
+
+            if(pg === 8)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Users.qml")
+                stackView.push("Users.qml");
+            }
+
+            if(pg === 9)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Telemetry.qml")
+                stackView.push("Telemetry.qml");
+            }
+
+            if(pg === 10)
+            {
+                stackView.pop();
+                applicationData.invokeSaveCurrentPage("Alarms.qml")
+                stackView.push("Alarms.qml");
             }
         }
     }
