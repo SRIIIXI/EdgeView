@@ -19,20 +19,33 @@
 		<file>qml/Alarms.qml</file>
 		<file>qml/Users.qml</file>
 
-        <file>images/Devices.png</file>
-        <file>images/Sites.png</file>
-        <file>images/Areas.png</file>
-        <file>images/Enterprises.png</file>
-        <file>images/Assets.png</file>
-        <file>images/Roles.png</file>
-        <file>images/Rules.png</file>
-        <file>images/Users.png</file>
-        <file>images/Alarms.png</file>
-        <file>images/Telemetry.png</file>
-                                                        
+        <file>images/DevicesBlack.png</file>
+        <file>images/SitesBlack.png</file>
+        <file>images/AreasBlack.png</file>
+        <file>images/EnterprisesBlack.png</file>
+        <file>images/AssetsBlack.png</file>
+        <file>images/RolesBlack.png</file>
+        <file>images/RulesBlack.png</file>
+        <file>images/UsersBlack.png</file>
+        <file>images/AlarmsBlack.png</file>
+        <file>images/TelemetryBlack.png</file>
+        <file>images/HomeBlack.png</file>
+        <file>images/ExitBlack.png</file>  
+		
+        <file>images/DevicesWhite.png</file>
+        <file>images/SitesWhite.png</file>
+        <file>images/AreasWhite.png</file>
+        <file>images/EnterprisesWhite.png</file>
+        <file>images/AssetsWhite.png</file>
+        <file>images/RolesWhite.png</file>
+        <file>images/RulesWhite.png</file>
+        <file>images/UsersWhite.png</file>
+        <file>images/AlarmsWhite.png</file>
+        <file>images/TelemetryWhite.png</file>
+        <file>images/HomeWhite.png</file>
+        <file>images/ExitWhite.png</file>  
+		
         <file>images/GreenDot.png</file>
-        <file>images/Home.png</file>
-        <file>images/Exit.png</file>
         <file>images/Pass.png</file>
         <file>images/Fail.png</file>
         <file>images/Done.png</file>

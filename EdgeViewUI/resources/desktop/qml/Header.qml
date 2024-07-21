@@ -70,11 +70,11 @@ Rectangle
             icon.source :
             if(applicationData.IsDarkTheme === true)
             {
-                return "../images/Users.png";
+                return "../images/UsersWhite.png";
             }
             else
             {
-                return "../images/Users.png";
+                return "../images/UsersBlack.png";
             }
 
             icon.color: "transparent"
@@ -110,7 +110,7 @@ Rectangle
                 color: applicationData.Theme.FontColor
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                text: applicationData.CurrentDeviceAddress
+                text: ""//applicationData.CurrentDeviceAddress
                 font.pointSize: fontSizeSmall
                 visible: isDeviceNameVisible
             }

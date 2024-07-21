@@ -166,7 +166,18 @@ ApplicationWindow
             Image
             {
                 id: exitButtonImg
-                source: "../images/Exit.png"
+                source:
+                {
+                    if(applicationData.IsDarkTheme === true)
+                    {
+                        return "../images/ExitWhite.png";
+                    }
+                    else
+                    {
+                        return "../images/ExitBlack.png";
+                    }
+                }
+
                 width: exitButton.height*0.5
                 height: exitButton.height*0.5
                 anchors.horizontalCenter: parent.horizontalCenter
