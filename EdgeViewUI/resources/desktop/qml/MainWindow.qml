@@ -20,11 +20,6 @@ ApplicationWindow
 
     property variant menuModel :  []
 
-    onClosing:
-    {
-        close.accepted = isClosing;
-    }
-
     Component.onCompleted:
     {
         stackView.push("Home.qml")

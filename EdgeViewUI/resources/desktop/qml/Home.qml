@@ -20,13 +20,42 @@ Page
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-        Label
+        Material.accent: applicationData.Theme.AccentColor
+        Material.theme:
         {
-           id: dummy
-           text: "Home"
-           anchors.horizontalCenter: parent.horizontalCenter
-           anchors.verticalCenter: parent.verticalCenter
-           color: applicationData.Theme.FontColor
+            if(applicationData.IsDarkTheme === true)
+            {
+                return Material.Dark;
+            }
+            else
+            {
+                return Material.Light;
+            }
+        }
+
+        //Label
+        //{
+        //   id: dummy
+        //   text: "Home"
+        //   anchors.horizontalCenter: parent.horizontalCenter
+        //   anchors.verticalCenter: parent.verticalCenter
+        //   color: applicationData.Theme.FontColor
+        //}
+
+        CustomTable
+        {
+            headerModel: [ // widths must add to 1
+                {text: 'Color',         width: 0.5},
+                {text: 'Hexadecimal',   width: 0.5},
+            ]
+
+            dataModel: [
+                ['Red',   '#ff0000'],
+                ['Green', '#00ff00'],
+                ['Blue',  '#0000ff'],
+            ]
+
+            onClicked: print('onClicked', currentRow)
         }
     }
 }

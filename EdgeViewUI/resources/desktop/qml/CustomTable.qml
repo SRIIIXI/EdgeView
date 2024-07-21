@@ -1,9 +1,12 @@
 import QtQuick 2.0
 
-Item { // size controlled by width
+Item
+{
+    // size controlled by width
     id: root
 
-// public
+
+    // public
     property variant headerModel: [ // widths must add to 1
         // {text: 'Color',         width: 0.5},
         // {text: 'Hexadecimal',   width: 0.5},
@@ -15,87 +18,129 @@ Item { // size controlled by width
         // ['blue',  '#0000ff'],
     ]
 
-    signal clicked(int row, variant rowData);  //onClicked: print('onClicked', row, JSON.stringify(rowData))
+    property int currentRow: 0
+    property int headerHeight: 20
+    property int rowHeight: 10
 
-// private
-    width: 500;  height: 200
+    signal clicked(int row);  //onClicked: print('onClicked', row, JSON.stringify(rowData))
 
-    Rectangle {
+    // private
+    width: 500;
+    height: 200
+
+    Rectangle
+    {
         id: header
 
-        width: parent.width;  height: 0.14 * root.width
+        width: parent.width;
+        height: headerHeight //0.14 * root.width
         color: 'black'
         radius: 0.03 * root.width
 
-        Rectangle { // half height to cover bottom rounded corners
-            width: parent.width;  height: 0.5 * parent.height
+        Rectangle
+        {
+            // half height to cover bottom rounded corners
+            width: parent.width;
+            height: headerHeight // 0.5 * parent.height
             color: parent.color
             anchors.bottom: parent.bottom
         }
 
-        ListView { // header
+        ListView
+        {
+            id: listHeader
+            // header
             anchors.fill: parent
             orientation: ListView.Horizontal
             interactive: false
 
             model: headerModel
 
-            delegate: Item { // cell
-                width: modelData.width * root.width;  height: header.height
+            delegate: Item
+            {
+                // cell
+                width: modelData.width * root.width;
+                height: header.height
 
-                Text {
+                Text
+                {
                     x: 0.03 * root.width
                     text: modelData.text
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 0.06 * root.width
-                    color: 'white'
+                    color: applicationData.Theme.FontColor
                 }
             }
         }
     }
 
-    ListView { // data
-        anchors{fill: parent;  topMargin: header.height}
+    ListView
+    {
+        id: listRows
+        // data
+        anchors
+        {
+            fill: parent;
+            topMargin: header.height
+        }
+
         interactive: contentHeight > height
         clip: true
 
         model: dataModel
 
-        delegate: Item { // row
-            width: root.width;  height: header.height
+        delegate: Item
+        {
+            // row
+            width: root.width;
+            height: header.height
             opacity: !mouseArea.pressed? 1: 0.3 // pressed state
 
             property int     row:     index     // outer index
             property variant rowData: modelData // much faster than listView.model[row]
 
-            Row {
+            Row
+            {
+                id: tableRow
                 anchors.fill: parent
 
-                Repeater { // index is column
+                Repeater
+                {
+                    id: cell
+                    // index is column
                     model: rowData // headerModel.length
 
-                    delegate: Item { // cell
-                        width: headerModel[index].width * root.width;  height: header.height
+                    delegate: Item
+                    {
+                        // cell
+                        width: headerModel[index].width * root.width;
+                        height: header.height
 
-                        Text {
+                        Text
+                        {
                             x: 0.03 * root.width
                             text: modelData
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 0.06 * root.width
+                            color: applicationData.Theme.FontColor
                         }
                     }
                 }
             }
 
-            MouseArea {
+            MouseArea
+            {
                 id: mouseArea
-
                 anchors.fill: parent
-
-                onClicked:  root.clicked(row, rowData)
+                onClicked:
+                {
+                    root.currentRow = row;
+                    root.clicked(tableRow.index)
+                }
             }
         }
 
         CustomScrollBar{}
     }
 }
+
