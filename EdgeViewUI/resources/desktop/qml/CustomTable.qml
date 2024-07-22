@@ -2,27 +2,20 @@ import QtQuick 2.0
 
 Item
 {
-    // size controlled by width
     id: root
 
-
     // public
-    property variant headerModel: [ // widths must add to 1
-        // {text: 'Color',         width: 0.5},
-        // {text: 'Hexadecimal',   width: 0.5},
-    ]
+    property variant headerModel: []
 
-    property variant dataModel: [
-        // ['red',   '#ff0000'],
-        // ['green', '#00ff00'],
-        // ['blue',  '#0000ff'],
-    ]
+    property variant dataModel: []
 
     property int currentRow: 0
     property int headerHeight: 20
     property int rowHeight: 10
+    property string headerColor: "dodgerblue"
+    property string fontColor: "black"
 
-    signal clicked(int row);  //onClicked: print('onClicked', row, JSON.stringify(rowData))
+    signal clicked(int row);
 
     // private
     width: 500;
@@ -33,18 +26,20 @@ Item
         id: header
 
         width: parent.width;
-        height: headerHeight //0.14 * root.width
-        color: 'black'
+        height: headerHeight
+        color: headerColor
         radius: 0.03 * root.width
 
+        /*
         Rectangle
         {
             // half height to cover bottom rounded corners
             width: parent.width;
-            height: headerHeight // 0.5 * parent.height
+            height: headerHeight
             color: parent.color
             anchors.bottom: parent.bottom
         }
+        */
 
         ListView
         {
@@ -67,8 +62,8 @@ Item
                     x: 0.03 * root.width
                     text: modelData.text
                     anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 0.06 * root.width
-                    color: applicationData.Theme.FontColor
+                    color: fontColor
+                    font.bold: true
                 }
             }
         }
@@ -121,7 +116,7 @@ Item
                             x: 0.03 * root.width
                             text: modelData
                             anchors.verticalCenter: parent.verticalCenter
-                            font.pixelSize: 0.06 * root.width
+                            //font.pixelSize: 0.06 * root.width
                             color: applicationData.Theme.FontColor
                         }
                     }

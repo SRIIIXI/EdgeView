@@ -20,13 +20,33 @@ Page
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
         ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-        Label
+        // Label
+        // {
+        //    id: dummy
+        //    text: "Devices"
+        //    anchors.horizontalCenter: parent.horizontalCenter
+        //    anchors.verticalCenter: parent.verticalCenter
+        //    color: applicationData.Theme.FontColor
+        // }
+
+        CustomTable
         {
-           id: dummy
-           text: "Devices"
-           anchors.horizontalCenter: parent.horizontalCenter
-           anchors.verticalCenter: parent.verticalCenter
-           color: applicationData.Theme.FontColor
+            headerColor: applicationData.Theme.ControlColor
+            fontColor: applicationData.Theme.FontColor
+            width: parent.width
+            height: parent.height
+            headerModel: [ // widths must add to 1
+                {text: 'Color',         width: 0.5},
+                {text: 'Hexadecimal',   width: 0.5},
+            ]
+
+            dataModel: [
+                ['Red',   '#ff0000'],
+                ['Green', '#00ff00'],
+                ['Blue',  '#0000ff'],
+            ]
+
+            onClicked: print('onClicked', currentRow)
         }
     }
 }

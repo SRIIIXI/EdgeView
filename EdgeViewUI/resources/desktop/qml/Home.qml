@@ -33,29 +33,13 @@ Page
             }
         }
 
-        //Label
-        //{
-        //   id: dummy
-        //   text: "Home"
-        //   anchors.horizontalCenter: parent.horizontalCenter
-        //   anchors.verticalCenter: parent.verticalCenter
-        //   color: applicationData.Theme.FontColor
-        //}
-
-        CustomTable
+        Label
         {
-            headerModel: [ // widths must add to 1
-                {text: 'Color',         width: 0.5},
-                {text: 'Hexadecimal',   width: 0.5},
-            ]
-
-            dataModel: [
-                ['Red',   '#ff0000'],
-                ['Green', '#00ff00'],
-                ['Blue',  '#0000ff'],
-            ]
-
-            onClicked: print('onClicked', currentRow)
+           id: dummy
+           text: "Home"
+           anchors.horizontalCenter: parent.horizontalCenter
+           anchors.verticalCenter: parent.verticalCenter
+           color: applicationData.Theme.FontColor
         }
     }
 }
