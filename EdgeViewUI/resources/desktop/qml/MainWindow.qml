@@ -1,6 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Controls.Material 2.3
+import QtQuick.Controls.Basic 2.3
 import QtQuick.Layouts 1.3
 
 ApplicationWindow
@@ -24,160 +24,396 @@ ApplicationWindow
     {
         stackView.push("Home.qml")
         menuModel = applicationData.Menu
+        //menuArea.open()
     }
 
     Rectangle
     {
-        id: brandingArea
-        height: applicationData.Theme.BarHeight * 2
-        width: 220
+        id: logoArea
+        height: applicationData.Theme.BarHeight
+        width:  200
         color: applicationData.Theme.BackgroundColor
         anchors.top: parent.top
         anchors.left: parent.left
-
         Image
         {
-            id: appLogo
+            id: name
             source: "../images/EdgeView.png"
-            height: parent.height * 0.9
-            width: parent.height * 0.9
+            width: parent.height*0.75
+            height: parent.height*0.75
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
         }
     }
 
-    Header
-    {
-        id: headerPanel
-        height: applicationData.Theme.BarHeight * 2
-        width: parent.width -  brandingArea.width
-        anchors.top: parent.top
-        anchors.right: parent.right
-        headerTitle: "Edge Manager"
-    }
-
     Rectangle
     {
         id: menuArea
-        height: parent.height - applicationData.Theme.BarHeight * 2
-        width: 220
-        anchors.bottom: parent.bottom
+        width: 200
+        height: parent.height - logoArea.height
+        color:
+        if(applicationData.IsDarkTheme === true)
+        {
+            return "darkgrey";
+        }
+        else
+        {
+            return "lightgrey";
+        }
         anchors.left: parent.left
-        color: applicationData.Theme.BackgroundColor
+        anchors.top: logoArea.bottom
 
-        ListView
+        CustomMenuItem
         {
-            id: menuListView
-            height: parent.height*0.95 - applicationData.Theme.BarHeight
-            width: parent.width*0.96
+            id: menuHome
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
             anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.horizontalCenter: parent.horizontalCenter
-            visible: true
-            spacing: 5
-            clip: true
-            model: menuModel
-            delegate: menuDelegate
-
-            onCurrentIndexChanged:
+            anchors.left: parent.left
+            text: "Home"
+            isActive: true
+            menuIconSource:
             {
-                applicationData.invokeChangePage(currentIndex);
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/HomeWhite.png";
+                }
+                else
+                {
+                    return "../images/HomeBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("home")
+                applicationData.invokeSaveCurrentPage("Home.qml")
+                stackView.pop()
+                stackView.push("Home.qml")
             }
         }
 
-        Component
+        CustomMenuItem
         {
-            id: menuDelegate
-
-            Rectangle
+            id: menuEnterprises
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuHome.bottom
+            anchors.left: parent.left
+            text: "Enterprises"
+            isActive: false
+            menuIconSource:
             {
-                id: menuItem
-                width: menuListView.width
-                height: applicationData.Theme.BarHeight*0.9
-                radius: 5
-                color: applicationData.Theme.ControlColor
-                border.color: applicationData.Theme.ControlLowColor
-
-                MouseArea
+                if(applicationData.IsDarkTheme === true)
                 {
-                    anchors.fill: parent
-                    onClicked:
-                    {
-                        menuListView.currentIndex = index
-                    }
+                    return "../images/EnterprisesWhite.png";
                 }
-
-                Image
+                else
                 {
-                    id: menuImg
-                    source: menuModel[index].ItemIcon
-                    width: menuItem.height*0.65
-                    height: menuItem.height*0.65
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors
-                    {
-                        left: parent.left
-                        leftMargin:  10
-                    }
+                    return "../images/EnterprisesBlack.png";
                 }
-
-                Label
-                {
-                    id:menuNamelbl
-                    font.pointSize: headerPanel.fontSizeSmall
-                    color: applicationData.Theme.FontColor
-                    elide: Label.ElideRight
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors
-                    {
-                        left: menuImg.right
-                        leftMargin: 30
-                    }
-
-                    text: menuModel[index].ItemName
-
-                    MouseArea
-                    {
-                        anchors.fill: parent
-                        onClicked:
-                        {
-                            menuListView.currentIndex = index
-                        }
-                    }
-                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("enterprises")
+                applicationData.invokeSaveCurrentPage("Enterprises.qml")
+                stackView.pop()
+                stackView.push("Enterprises.qml")
             }
         }
 
-        RoundButton
+        CustomMenuItem
         {
-            id: exitButton
-            height: applicationData.Theme.BarHeight
-            width: applicationData.Theme.BarHeight
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 10
-            anchors.horizontalCenter: parent.horizontalCenter
-            Image
+            id: menuSites
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuEnterprises.bottom
+            anchors.left: parent.left
+            text: "Sites"
+            isActive: false
+            menuIconSource:
             {
-                id: exitButtonImg
-                source:
+                if(applicationData.IsDarkTheme === true)
                 {
-                    if(applicationData.IsDarkTheme === true)
-                    {
-                        return "../images/ExitWhite.png";
-                    }
-                    else
-                    {
-                        return "../images/ExitBlack.png";
-                    }
+                    return "../images/SitesWhite.png";
                 }
-
-                width: exitButton.height*0.5
-                height: exitButton.height*0.5
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.verticalCenter: parent.verticalCenter
+                else
+                {
+                    return "../images/SitesBlack.png";
+                }
             }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("sites")
+                applicationData.invokeSaveCurrentPage("Sites.qml")
+                stackView.pop()
+                stackView.push("Sites.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuAreas
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuSites.bottom
+            anchors.left: parent.left
+            text: "Areas"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/AreasWhite.png";
+                }
+                else
+                {
+                    return "../images/AreasBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("areas")
+                applicationData.invokeSaveCurrentPage("Areas.qml")
+                stackView.pop()
+                stackView.push("Areas.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuDevices
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuAreas.bottom
+            anchors.left: parent.left
+            text: "Devices"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/DevicesWhite.png";
+                }
+                else
+                {
+                    return "../images/DevicesBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("devices")
+                applicationData.invokeSaveCurrentPage("Devices.qml")
+                stackView.pop()
+                stackView.push("Devices.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuAssets
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuDevices.bottom
+            anchors.left: parent.left
+            text: "Assets"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/AssetsWhite.png";
+                }
+                else
+                {
+                    return "../images/AssetsBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("assets")
+                applicationData.invokeSaveCurrentPage("Assets.qml")
+                stackView.pop()
+                stackView.push("Assets.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuRules
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuAssets.bottom
+            anchors.left: parent.left
+            text: "Rules"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/RulesWhite.png";
+                }
+                else
+                {
+                    return "../images/RulesBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("rules")
+                applicationData.invokeSaveCurrentPage("Rules.qml")
+                stackView.pop()
+                stackView.push("Rules.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuRoles
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuRules.bottom
+            anchors.left: parent.left
+            text: "Roles"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/RolesWhite.png";
+                }
+                else
+                {
+                    return "../images/RolesBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("roles")
+                applicationData.invokeSaveCurrentPage("Roles.qml")
+                stackView.pop()
+                stackView.push("Roles.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuUsers
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuRoles.bottom
+            anchors.left: parent.left
+            text: "Users"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/UsersWhite.png";
+                }
+                else
+                {
+                    return "../images/UsersBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("users");
+                applicationData.invokeSaveCurrentPage("Users.qml")
+                stackView.pop()
+                stackView.push("Users.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuTelemetry
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuUsers.bottom
+            anchors.left: parent.left
+            text: "Telemetry"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/TelemetryWhite.png";
+                }
+                else
+                {
+                    return "../images/TelemetryBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("telemetry")
+                applicationData.invokeSaveCurrentPage("Telemetry.qml")
+                stackView.pop()
+                stackView.push("Telemetry.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuAlarms
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuTelemetry.bottom
+            anchors.left: parent.left
+            text: "Alarms"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/AlarmsWhite.png";
+                }
+                else
+                {
+                    return "../images/AlarmsBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("alarms")
+                applicationData.invokeSaveCurrentPage("Alarms.qml")
+                stackView.pop()
+                stackView.push("Alarms.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuExit
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuAlarms.bottom
+            anchors.left: parent.left
+            text: "Exit"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/ExitWhite.png";
+                }
+                else
+                {
+                    return "../images/ExitBlack.png";
+                }
+            }
+            textColor: applicationData.Theme.FontColor
             onClicked:
             {
                 applicationData.invokeExit();
@@ -185,11 +421,21 @@ ApplicationWindow
         }
     }
 
+    Header
+    {
+        id: headerPanel
+        height: applicationData.Theme.BarHeight
+        width: parent.width -  menuArea.width
+        anchors.top: parent.top
+        anchors.right: parent.right
+        headerTitle: "Edge Manager"
+    }
+
     StackView
     {
         id: stackView
-        height: parent.height - applicationData.Theme.BarHeight * 2 - 2
-        width: parent.width -  menuArea.width - 2
+        height: parent.height - applicationData.Theme.BarHeight
+        width: parent.width -  menuArea.width
         anchors.bottom: parent.bottom
         anchors.right: parent.right
     }
@@ -199,21 +445,84 @@ ApplicationWindow
         id: horizontalBorder
         height: 1
         width: mainView.width
-        anchors.top: brandingArea.bottom
+        anchors.top: headerPanel.bottom
         anchors.left: mainView.left
         radius: 0
         color: applicationData.Theme.ControlLowColor
     }
 
-    Rectangle
+    function updateMenu(menuname)
     {
-        id: verticalBorder
-        height: mainView.height
-        width: 1
-        anchors.top: mainView.top
-        anchors.left: brandingArea.right
-        radius: 0
-        color: applicationData.Theme.ControlLowColor
+        menuAlarms.isActive = false;
+        menuAreas.isActive = false;
+        menuAssets.isActive = false;
+        menuDevices.isActive = false;
+        menuEnterprises.isActive = false;
+        menuHome.isActive = false;
+        menuRoles.isActive = false;
+        menuRules.isActive = false;
+        menuSites.isActive = false;
+        menuTelemetry.isActive = false;
+        menuUsers.isActive = false;
+
+        switch(menuname)
+        {
+        case "home":
+        {
+            menuHome.isActive = true;
+            break;
+        }
+        case "enterprises":
+        {
+            menuEnterprises.isActive = true;
+            break;
+        }
+        case "sites":
+        {
+            menuSites.isActive = true;
+            break;
+        }
+        case "areas":
+        {
+            menuAreas.isActive = true;
+            break;
+        }
+        case "devices":
+        {
+            menuDevices.isActive = true;
+            break;
+        }
+        case "assets":
+        {
+            menuAssets.isActive = true;
+            break;
+        }
+        case "rules":
+        {
+            menuRules.isActive = true;
+            break;
+        }
+        case "roles":
+        {
+            menuRoles.isActive = true;
+            break;
+        }
+        case "users":
+        {
+            menuUsers.isActive = true;
+            break;
+        }
+        case "telemetry":
+        {
+            menuTelemetry.isActive = true;
+            break;
+        }
+        case "alarms":
+        {
+            menuAlarms.isActive = true;
+            break;
+        }
+        }
     }
 
     Connections

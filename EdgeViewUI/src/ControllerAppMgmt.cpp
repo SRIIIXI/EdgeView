@@ -2,6 +2,16 @@
 
 void Controller::invokeChangePage(int ipage)
 {
+    for(int x = 0; x < menuItemList_.count(); x++)
+    {
+        menuItemList_[ipage].IsSelected_ = false;
+
+    }
+
+    menuItemList_[ipage].IsSelected_ = true;
+
+    //emit MenuChanged();
+    emit menuAction();
     emit pageAction(ipage);
 }
 

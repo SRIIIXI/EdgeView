@@ -1,23 +1,24 @@
 <RCC>
     <qresource prefix="/">
-		<file>qml/Header.qml</file>
-		<file>qml/MainWindow.qml</file>
+	<file>qml/Header.qml</file>
+	<file>qml/MainWindow.qml</file>
 
-		<file>qml/CustomButton.qml</file>
-		<file>qml/CustomTable.qml</file>
-		<file>qml/CustomScrollBar.qml</file>
+	<file>qml/CustomButton.qml</file>
+	<file>qml/CustomMenuItem.qml</file>
+	<file>qml/CustomTable.qml</file>
+	<file>qml/CustomScrollBar.qml</file>
 
-		<file>qml/Home.qml</file>        
-		<file>qml/Devices.qml</file>
-		<file>qml/Assets.qml</file>
-		<file>qml/Sites.qml</file>
-		<file>qml/Areas.qml</file>
-		<file>qml/Enterprises.qml</file>
-		<file>qml/Roles.qml</file>
-		<file>qml/Rules.qml</file>
-		<file>qml/Telemetry.qml</file>
-		<file>qml/Alarms.qml</file>
-		<file>qml/Users.qml</file>
+	<file>qml/Home.qml</file>        
+	<file>qml/Devices.qml</file>
+	<file>qml/Assets.qml</file>
+	<file>qml/Sites.qml</file>
+	<file>qml/Areas.qml</file>
+	<file>qml/Enterprises.qml</file>
+	<file>qml/Roles.qml</file>
+	<file>qml/Rules.qml</file>
+	<file>qml/Telemetry.qml</file>
+	<file>qml/Alarms.qml</file>
+	<file>qml/Users.qml</file>
 
         <file>images/DevicesBlack.png</file>
         <file>images/SitesBlack.png</file>

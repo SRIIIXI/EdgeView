@@ -17,10 +17,13 @@ public:
 public:
     QString ItemIcon_;
 public:
+    bool IsSelected_;
+public:
     Q_PROPERTY(bool IsAdmin MEMBER IsAdmin_)
     Q_PROPERTY(QString ItemName MEMBER ItemName_)
     Q_PROPERTY(QString ItemTarget MEMBER ItemTarget_)
     Q_PROPERTY(QString ItemIcon MEMBER ItemIcon_)
+    Q_PROPERTY(bool IsSelected MEMBER IsSelected_)
 
 public:
     ~ApplicationMenu()
@@ -36,12 +39,14 @@ public:
     ApplicationMenu(bool iIsAdmin,
                      QString iItemName,
                      QString iItemTarget,
-                     QString iItemIcon)
+                     QString iItemIcon,
+                    bool iIsSelected = false)
     {
         IsAdmin_ = iIsAdmin;
         ItemName_ = iItemName;
         ItemTarget_ = iItemTarget;
         ItemIcon_ = iItemIcon;
+        IsSelected_= iIsSelected;
     }
 
     ApplicationMenu(const ApplicationMenu& other)
@@ -50,6 +55,7 @@ public:
         ItemName_ = other.ItemName_;
         ItemTarget_ = other.ItemTarget_;
         ItemIcon_ = other.ItemIcon_;
+        IsSelected_ = other.IsSelected_;
     }
 
     ApplicationMenu& operator = (const ApplicationMenu& other)
@@ -58,6 +64,7 @@ public:
         ItemName_ = other.ItemName_;
         ItemTarget_ = other.ItemTarget_;
         ItemIcon_ = other.ItemIcon_;
+        IsSelected_ = other.IsSelected_;
         return *this;
     }
 };

@@ -9,32 +9,26 @@ Page
 
     Rectangle
     {
-        id: background
-        anchors.fill: parent
-        color: applicationData.Theme.BackgroundColor
-    }
+       id: background
+       anchors.fill: parent
+       color: applicationData.Theme.BackgroundColor
 
-    ScrollView
-    {
-        anchors.fill: parent
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
-        // Label
-        // {
-        //    id: dummy
-        //    text: "Devices"
-        //    anchors.horizontalCenter: parent.horizontalCenter
-        //    anchors.verticalCenter: parent.verticalCenter
-        //    color: applicationData.Theme.FontColor
-        // }
+       Rectangle
+       {
+           id: navigationBar
+           height: applicationData.Theme.BarHeight
+           width: parent.width
+           anchors.top: parent.top
+           color: applicationData.Theme.BackgroundColor
+       }
 
         CustomTable
         {
             headerColor: applicationData.Theme.ControlColor
             fontColor: applicationData.Theme.FontColor
             width: parent.width
-            height: parent.height
+            height: parent.height - navigationBar.height
+            anchors.top: navigationBar.bottom
             headerModel: [ // widths must add to 1
                 {text: 'Color',         width: 0.5},
                 {text: 'Hexadecimal',   width: 0.5},

@@ -19,9 +19,13 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         theme_.EnableDarkMode();
     }
 
+    isDarkTheme_ = false;
+    theme_.EnableLightMode();
+
+
     if(isDarkTheme_)
     {
-        menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeWhite.png"));
+        menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeWhite.png", true));
         menuItemList_.append(ApplicationMenu(true, "Enterprises", "Enterprises.qml", "../images/EnterprisesWhite.png"));
         menuItemList_.append(ApplicationMenu(true, "Sites", "Sites.qml", "../images/SitesWhite.png"));
         menuItemList_.append(ApplicationMenu(true, "Areas", "Areas.qml", "../images/AreasWhite.png"));
@@ -35,7 +39,7 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
     }
     else
     {
-        menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeBlack.png"));
+        menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeBlack.png", true));
         menuItemList_.append(ApplicationMenu(true, "Enterprises", "Enterprises.qml", "../images/EnterprisesBlack.png"));
         menuItemList_.append(ApplicationMenu(true, "Sites", "Sites.qml", "../images/SitesBlack.png"));
         menuItemList_.append(ApplicationMenu(true, "Areas", "Areas.qml", "../images/AreasBlack.png"));

@@ -28,18 +28,7 @@ Item
         width: parent.width;
         height: headerHeight
         color: headerColor
-        radius: 0.03 * root.width
-
-        /*
-        Rectangle
-        {
-            // half height to cover bottom rounded corners
-            width: parent.width;
-            height: headerHeight
-            color: parent.color
-            anchors.bottom: parent.bottom
-        }
-        */
+        radius: 0
 
         ListView
         {
