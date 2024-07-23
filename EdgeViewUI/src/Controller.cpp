@@ -19,10 +19,6 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         theme_.EnableDarkMode();
     }
 
-    isDarkTheme_ = false;
-    theme_.EnableLightMode();
-
-
     if(isDarkTheme_)
     {
         menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeWhite.png", true));

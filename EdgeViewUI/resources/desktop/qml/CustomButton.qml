@@ -8,6 +8,7 @@ Rectangle
     property int buttonWidth: 75
     property int buttonHeight: 25
     property string accentColor: "blue"
+    property string fontColor: "white"
     property bool isDefault: true
     property int textAlignment: Text.ElideNone
     signal clicked();
@@ -40,7 +41,7 @@ Rectangle
         {
             if(isDefault === true)
             {
-                return "white"
+                return fontColor
             }
             else
             {

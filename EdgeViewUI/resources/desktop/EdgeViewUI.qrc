@@ -4,6 +4,7 @@
 	<file>qml/MainWindow.qml</file>
 
 	<file>qml/CustomButton.qml</file>
+	<file>qml/CustomRoundButton.qml</file>
 	<file>qml/CustomMenuItem.qml</file>
 	<file>qml/CustomTable.qml</file>
 	<file>qml/CustomScrollBar.qml</file>
@@ -20,38 +21,48 @@
 	<file>qml/Alarms.qml</file>
 	<file>qml/Users.qml</file>
 
-        <file>images/DevicesBlack.png</file>
-        <file>images/SitesBlack.png</file>
-        <file>images/AreasBlack.png</file>
-        <file>images/EnterprisesBlack.png</file>
-        <file>images/AssetsBlack.png</file>
-        <file>images/RolesBlack.png</file>
-        <file>images/RulesBlack.png</file>
-        <file>images/UsersBlack.png</file>
-        <file>images/AlarmsBlack.png</file>
-        <file>images/TelemetryBlack.png</file>
-        <file>images/HomeBlack.png</file>
-        <file>images/ExitBlack.png</file>  
-		
-        <file>images/DevicesWhite.png</file>
-        <file>images/SitesWhite.png</file>
-        <file>images/AreasWhite.png</file>
-        <file>images/EnterprisesWhite.png</file>
-        <file>images/AssetsWhite.png</file>
-        <file>images/RolesWhite.png</file>
-        <file>images/RulesWhite.png</file>
-        <file>images/UsersWhite.png</file>
-        <file>images/AlarmsWhite.png</file>
-        <file>images/TelemetryWhite.png</file>
-        <file>images/HomeWhite.png</file>
-        <file>images/ExitWhite.png</file>  
-		
-        <file>images/GreenDot.png</file>
-        <file>images/Pass.png</file>
-        <file>images/Fail.png</file>
-        <file>images/Done.png</file>
-        
-        <file>images/EdgeView.png</file>
+	<file>images/DevicesBlack.png</file>
+	<file>images/SitesBlack.png</file>
+	<file>images/AreasBlack.png</file>
+	<file>images/EnterprisesBlack.png</file>
+	<file>images/AssetsBlack.png</file>
+	<file>images/RolesBlack.png</file>
+	<file>images/RulesBlack.png</file>
+	<file>images/UsersBlack.png</file>
+	<file>images/AlarmsBlack.png</file>
+	<file>images/TelemetryBlack.png</file>
+	<file>images/HomeBlack.png</file>
+	<file>images/ExitBlack.png</file>  
+	<file>images/ExportBlack.png</file>  
+	<file>images/ImportBlack.png</file>  
+	<file>images/AddBlack.png</file>  
+	<file>images/LeftBlack.png</file>  
+	<file>images/RightBlack.png</file>  
+
+	<file>images/DevicesWhite.png</file>
+	<file>images/SitesWhite.png</file>
+	<file>images/AreasWhite.png</file>
+	<file>images/EnterprisesWhite.png</file>
+	<file>images/AssetsWhite.png</file>
+	<file>images/RolesWhite.png</file>
+	<file>images/RulesWhite.png</file>
+	<file>images/UsersWhite.png</file>
+	<file>images/AlarmsWhite.png</file>
+	<file>images/TelemetryWhite.png</file>
+	<file>images/HomeWhite.png</file>
+	<file>images/ExitWhite.png</file>  
+	<file>images/ExportWhite.png</file>  
+	<file>images/ImportWhite.png</file>  
+	<file>images/AddWhite.png</file>  
+	<file>images/LeftWhite.png</file>  
+	<file>images/RightWhite.png</file>  
+
+	<file>images/GreenDot.png</file>
+	<file>images/Pass.png</file>
+	<file>images/Fail.png</file>
+	<file>images/Done.png</file>
+
+	<file>images/EdgeView.png</file>
 	<file>images/SampleUser.png</file>
     </qresource>
 </RCC>

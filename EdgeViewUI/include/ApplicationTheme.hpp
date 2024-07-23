@@ -97,7 +97,7 @@ public:
         AccentLowColor_ = "#00bfff";
         BackgroundColor_ = "#000000";
         ControlColor_ = "#1C2833";
-        ControlLowColor_ = "#2f4f4f";
+        ControlLowColor_ = "#696969";
         BarHeight_ = 50;
     }
 

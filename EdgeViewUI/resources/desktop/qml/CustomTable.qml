@@ -14,6 +14,7 @@ Item
     property int rowHeight: 10
     property string headerColor: "dodgerblue"
     property string fontColor: "black"
+    property string rowColor: "lightgrey"
 
     signal clicked(int row);
 
@@ -56,6 +57,14 @@ Item
                 }
             }
         }
+    }
+
+    Rectangle
+    {
+        width: parent.width;
+        height: parent.height - headerHeight
+        anchors.top: header.bottom
+        color: rowColor
     }
 
     ListView
@@ -105,8 +114,7 @@ Item
                             x: 0.03 * root.width
                             text: modelData
                             anchors.verticalCenter: parent.verticalCenter
-                            //font.pixelSize: 0.06 * root.width
-                            color: applicationData.Theme.FontColor
+                            color: fontColor
                         }
                     }
                 }

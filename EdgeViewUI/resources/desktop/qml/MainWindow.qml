@@ -1,11 +1,14 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQuick.Controls.Basic 2.3
+import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 
 ApplicationWindow
 {
     id: mainView
+
+    Material.theme: Material.Light
+    Material.accent: applicationData.Theme.AccentColor
 
     objectName: "mainViewID"
     visible: true
@@ -35,15 +38,7 @@ ApplicationWindow
         width:  200
         anchors.top: parent.top
         anchors.left: parent.left
-        color:
-        if(applicationData.IsDarkTheme === true)
-        {
-            return "darkgrey";
-        }
-        else
-        {
-            return "lightgrey";
-        }
+        color: applicationData.Theme.ControlColor
 
         Rectangle
         {
@@ -54,13 +49,16 @@ ApplicationWindow
             anchors.verticalCenter: parent.verticalCenter
             radius: height*0.5
             border.width: 1
-            border.color: "black"
-            // Image
-            // {
-            //     id: name
-            //     source: "../images/SampleUser.png"
-            //     anchors.fill: parent
-            // }
+            border.color: "grey"
+
+            Image
+            {
+                id: name
+                anchors.centerIn: parent
+                height: userImageRect.height*0.66
+                width: userImageRect.height*0.66
+                source: "../images/SampleUser.png"
+            }
         }
 
         Label
@@ -77,15 +75,7 @@ ApplicationWindow
         id: menuArea
         width: 200
         height: parent.height - userArea.height
-        color:
-        if(applicationData.IsDarkTheme === true)
-        {
-            return "darkgrey";
-        }
-        else
-        {
-            return "lightgrey";
-        }
+        color: applicationData.Theme.ControlColor
         anchors.left: parent.left
         anchors.top: userArea.bottom
 
@@ -109,6 +99,7 @@ ApplicationWindow
                     return "../images/HomeBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -137,6 +128,7 @@ ApplicationWindow
                     return "../images/EnterprisesBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -165,6 +157,7 @@ ApplicationWindow
                     return "../images/SitesBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -193,6 +186,7 @@ ApplicationWindow
                     return "../images/AreasBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -221,6 +215,7 @@ ApplicationWindow
                     return "../images/DevicesBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -249,6 +244,7 @@ ApplicationWindow
                     return "../images/AssetsBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -277,6 +273,7 @@ ApplicationWindow
                     return "../images/RulesBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -305,6 +302,7 @@ ApplicationWindow
                     return "../images/RolesBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -333,6 +331,7 @@ ApplicationWindow
                     return "../images/UsersBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -361,6 +360,7 @@ ApplicationWindow
                     return "../images/TelemetryBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -389,6 +389,7 @@ ApplicationWindow
                     return "../images/AlarmsBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -417,6 +418,7 @@ ApplicationWindow
                     return "../images/ExitBlack.png";
                 }
             }
+            normalColor: applicationData.Theme.ControlColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -437,23 +439,24 @@ ApplicationWindow
 
     Rectangle
     {
-        id: horizontalBorder
-        height: 1
-        width: mainView.width - userArea.width
-        anchors.top: headerPanel.bottom
-        anchors.left: userArea.right
-        radius: 0
-        color: applicationData.Theme.ControlLowColor
-    }
-
-    Rectangle
-    {
         id: actionBar
         height: applicationData.Theme.BarHeight
         width: mainView.width - userArea.width
-        anchors.top: horizontalBorder.bottom
+        anchors.top: headerPanel.bottom
         anchors.left: userArea.right
-        color: "lightgrey"
+        color: applicationData.Theme.BackgroundColor
+
+        CustomButton
+        {
+            buttonWidth: 100
+            buttonHeight: actionBar.height*0.66
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 10
+            accentColor: applicationData.Theme.AccentColor
+            fontColor: applicationData.Theme.FontColor
+            text: "Select All"
+        }
 
         Row
         {
@@ -467,14 +470,24 @@ ApplicationWindow
             {
                 height: actionBar.height
                 width: actionBar.height
-                color: "lightgrey"
-                RoundButton
+                color: applicationData.Theme.BackgroundColor
+                CustomRoundButton
                 {
-                    height: actionBar.height*0.66
-                    width: actionBar.height*0.66
+                    buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    icon.source: "../images/AlarmsBlack.png"
+                    accentColor: applicationData.Theme.AccentColor
+                    imageSource:
+                    {
+                        if(applicationData.IsDarkTheme === true)
+                        {
+                            return "../images/ExportWhite.png";
+                        }
+                        else
+                        {
+                            return "../images/ExportBlack.png";
+                        }
+                    }
                 }
             }
 
@@ -482,13 +495,24 @@ ApplicationWindow
             {
                 height: actionBar.height
                 width: actionBar.height
-                color: "lightgrey"
-                RoundButton
+                color: applicationData.Theme.BackgroundColor
+                CustomRoundButton
                 {
-                    height: actionBar.height*0.66
-                    width: actionBar.height*0.66
+                    buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    accentColor: applicationData.Theme.AccentColor
+                    imageSource:
+                    {
+                        if(applicationData.IsDarkTheme === true)
+                        {
+                            return "../images/ImportWhite.png";
+                        }
+                        else
+                        {
+                            return "../images/ImportBlack.png";
+                        }
+                    }
                 }
             }
 
@@ -496,13 +520,24 @@ ApplicationWindow
             {
                 height: actionBar.height
                 width: actionBar.height
-                color: "lightgrey"
-                RoundButton
+                color: applicationData.Theme.BackgroundColor
+                CustomRoundButton
                 {
-                    height: actionBar.height*0.66
-                    width: actionBar.height*0.66
+                    buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    accentColor: applicationData.Theme.AccentColor
+                    imageSource:
+                    {
+                        if(applicationData.IsDarkTheme === true)
+                        {
+                            return "../images/AddWhite.png";
+                        }
+                        else
+                        {
+                            return "../images/AddBlack.png";
+                        }
+                    }
                 }
             }
         }
@@ -601,7 +636,7 @@ ApplicationWindow
         width: mainView.width - userArea.width
         anchors.top: clientArea.bottom
         anchors.left: userArea.right
-        color: "lightgrey" //applicationData.Theme.BackgroundColor
+        color: applicationData.Theme.BackgroundColor
 
         Row
         {
@@ -615,14 +650,24 @@ ApplicationWindow
             {
                 height: navigationBar.height
                 width: navigationBar.height
-                color: "lightgrey"
-                RoundButton
+                color: applicationData.Theme.BackgroundColor
+                CustomRoundButton
                 {
-                    height: navigationBar.height*0.66
-                    width: navigationBar.height*0.66
+                    buttonSize: navigationBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    icon.source: "../images/AlarmsBlack.png"
+                    accentColor: applicationData.Theme.AccentColor
+                    imageSource:
+                    {
+                        if(applicationData.IsDarkTheme === true)
+                        {
+                            return "../images/LeftWhite.png";
+                        }
+                        else
+                        {
+                            return "../images/LeftBlack.png";
+                        }
+                    }
                 }
             }
 
@@ -630,27 +675,23 @@ ApplicationWindow
             {
                 height: navigationBar.height
                 width: navigationBar.height
-                color: "lightgrey"
-                RoundButton
-                {
-                    height: navigationBar.height*0.66
-                    width: navigationBar.height*0.66
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-            }
+                color: applicationData.Theme.BackgroundColor
 
-            Rectangle
-            {
-                height: navigationBar.height
-                width: navigationBar.height
-                color: "lightgrey"
-                RoundButton
+                CustomRoundButton
                 {
-                    height: navigationBar.height*0.66
-                    width: navigationBar.height*0.66
+                    buttonSize: navigationBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
+                    accentColor: applicationData.Theme.AccentColor
+                    imageSource:
+                    if(applicationData.IsDarkTheme === true)
+                    {
+                        return "../images/RightWhite.png";
+                    }
+                    else
+                    {
+                        return "../images/RightBlack.png";
+                    }
                 }
             }
         }
@@ -766,79 +807,57 @@ ApplicationWindow
         {
             if(pg === 0)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Home.qml")
-                //stackView.push("Home.qml");
             }
 
             if(pg === 1)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Enterprises.qml")
-                //stackView.push("Enterprises.qml");
             }
 
             if(pg === 2)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Sites.qml")
-                //stackView.push("Sites.qml");
             }
 
             if(pg === 3)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Areas.qml")
-                //stackView.push("Areas.qml");
             }
 
             if(pg === 4)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Devices.qml")
-                //stackView.push("Devices.qml");
             }
 
             if(pg === 5)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Assets.qml")
-                //stackView.push("Assets.qml");
             }
 
             if(pg === 6)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Rules.qml")
-                //stackView.push("Rules.qml");
             }
 
             if(pg === 7)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Roles.qml")
-                //stackView.push("Roles.qml");
             }
 
             if(pg === 8)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Users.qml")
-                //stackView.push("Users.qml");
             }
 
             if(pg === 9)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Telemetry.qml")
-                //stackView.push("Telemetry.qml");
             }
 
             if(pg === 10)
             {
-                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Alarms.qml")
-                //stackView.push("Alarms.qml");
             }
         }
     }
