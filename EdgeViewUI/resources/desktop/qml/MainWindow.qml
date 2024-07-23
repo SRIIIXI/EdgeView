@@ -21,8 +21,6 @@ ApplicationWindow
     Component.onCompleted:
     {
         updateMenu("home")
-        homePage.visible = true
-        //stackView.push("Home.qml")
     }
 
     Label
@@ -35,9 +33,17 @@ ApplicationWindow
         id: userArea
         height: applicationData.Theme.BarHeight*2
         width:  200
-        color: applicationData.Theme.BackgroundColor
         anchors.top: parent.top
         anchors.left: parent.left
+        color:
+        if(applicationData.IsDarkTheme === true)
+        {
+            return "darkgrey";
+        }
+        else
+        {
+            return "lightgrey";
+        }
 
         Rectangle
         {
@@ -108,8 +114,6 @@ ApplicationWindow
             {
                 updateMenu("home")
                 applicationData.invokeSaveCurrentPage("Home.qml")
-                //stackView.pop()
-                //stackView.push("Home.qml")
             }
         }
 
@@ -138,8 +142,6 @@ ApplicationWindow
             {
                 updateMenu("enterprises")
                 applicationData.invokeSaveCurrentPage("Enterprises.qml")
-                //stackView.pop()
-                //stackView.push("Enterprises.qml")
             }
         }
 
@@ -168,8 +170,6 @@ ApplicationWindow
             {
                 updateMenu("sites")
                 applicationData.invokeSaveCurrentPage("Sites.qml")
-                //stackView.pop()
-                //stackView.push("Sites.qml")
             }
         }
 
@@ -198,8 +198,6 @@ ApplicationWindow
             {
                 updateMenu("areas")
                 applicationData.invokeSaveCurrentPage("Areas.qml")
-                //stackView.pop()
-                //stackView.push("Areas.qml")
             }
         }
 
@@ -228,8 +226,6 @@ ApplicationWindow
             {
                 updateMenu("devices")
                 applicationData.invokeSaveCurrentPage("Devices.qml")
-                //stackView.pop()
-                //stackView.push("Devices.qml")
             }
         }
 
@@ -258,8 +254,6 @@ ApplicationWindow
             {
                 updateMenu("assets")
                 applicationData.invokeSaveCurrentPage("Assets.qml")
-                //stackView.pop()
-                //stackView.push("Assets.qml")
             }
         }
 
@@ -288,8 +282,6 @@ ApplicationWindow
             {
                 updateMenu("rules")
                 applicationData.invokeSaveCurrentPage("Rules.qml")
-                //stackView.pop()
-                //stackView.push("Rules.qml")
             }
         }
 
@@ -318,8 +310,6 @@ ApplicationWindow
             {
                 updateMenu("roles")
                 applicationData.invokeSaveCurrentPage("Roles.qml")
-                //stackView.pop()
-                //stackView.push("Roles.qml")
             }
         }
 
@@ -348,8 +338,6 @@ ApplicationWindow
             {
                 updateMenu("users");
                 applicationData.invokeSaveCurrentPage("Users.qml")
-                //stackView.pop()
-                //stackView.push("Users.qml")
             }
         }
 
@@ -378,8 +366,6 @@ ApplicationWindow
             {
                 updateMenu("telemetry")
                 applicationData.invokeSaveCurrentPage("Telemetry.qml")
-                //stackView.pop()
-                //stackView.push("Telemetry.qml")
             }
         }
 
@@ -408,8 +394,6 @@ ApplicationWindow
             {
                 updateMenu("alarms")
                 applicationData.invokeSaveCurrentPage("Alarms.qml")
-                //stackView.pop()
-                //stackView.push("Alarms.qml")
             }
         }
 
@@ -451,21 +435,85 @@ ApplicationWindow
         headerTitle: "Edge Manager"
     }
 
-    //StackView
-    //{
-    //    id: stackView
-    //    height: parent.height - applicationData.Theme.BarHeight
-    //    width: parent.width -  menuArea.width
-    //    anchors.bottom: parent.bottom
-    //    anchors.right: parent.right
-    //}
+    Rectangle
+    {
+        id: horizontalBorder
+        height: 1
+        width: mainView.width - userArea.width
+        anchors.top: headerPanel.bottom
+        anchors.left: userArea.right
+        radius: 0
+        color: applicationData.Theme.ControlLowColor
+    }
+
+    Rectangle
+    {
+        id: actionBar
+        height: applicationData.Theme.BarHeight
+        width: mainView.width - userArea.width
+        anchors.top: horizontalBorder.bottom
+        anchors.left: userArea.right
+        color: "lightgrey"
+
+        Row
+        {
+            spacing: 5
+            anchors.rightMargin: 10
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.verticalCenter: parent.verticalCenter
+
+            Rectangle
+            {
+                height: actionBar.height
+                width: actionBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: actionBar.height*0.66
+                    width: actionBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    icon.source: "../images/AlarmsBlack.png"
+                }
+            }
+
+            Rectangle
+            {
+                height: actionBar.height
+                width: actionBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: actionBar.height*0.66
+                    width: actionBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Rectangle
+            {
+                height: actionBar.height
+                width: actionBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: actionBar.height*0.66
+                    width: actionBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
+        }
+    }
 
     Rectangle
     {
         id: clientArea
-        height: parent.height - applicationData.Theme.BarHeight
+        height: parent.height - headerPanel.height - navigationBar.height - actionBar.height
         width: parent.width -  menuArea.width
-        anchors.bottom: parent.bottom
+        anchors.top: actionBar.bottom
         anchors.right: parent.right
 
         Home
@@ -548,13 +596,64 @@ ApplicationWindow
 
     Rectangle
     {
-        id: horizontalBorder
-        height: 1
+        id: navigationBar
+        height: applicationData.Theme.BarHeight
         width: mainView.width - userArea.width
-        anchors.top: headerPanel.bottom
+        anchors.top: clientArea.bottom
         anchors.left: userArea.right
-        radius: 0
-        color: applicationData.Theme.ControlLowColor
+        color: "lightgrey" //applicationData.Theme.BackgroundColor
+
+        Row
+        {
+            spacing: 5
+            anchors.rightMargin: 10
+            anchors.right: parent.right
+            anchors.top: parent.top
+            anchors.verticalCenter: parent.verticalCenter
+
+            Rectangle
+            {
+                height: navigationBar.height
+                width: navigationBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: navigationBar.height*0.66
+                    width: navigationBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    icon.source: "../images/AlarmsBlack.png"
+                }
+            }
+
+            Rectangle
+            {
+                height: navigationBar.height
+                width: navigationBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: navigationBar.height*0.66
+                    width: navigationBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+            Rectangle
+            {
+                height: navigationBar.height
+                width: navigationBar.height
+                color: "lightgrey"
+                RoundButton
+                {
+                    height: navigationBar.height*0.66
+                    width: navigationBar.height*0.66
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
+            }
+        }
     }
 
     function updateMenu(menuname)

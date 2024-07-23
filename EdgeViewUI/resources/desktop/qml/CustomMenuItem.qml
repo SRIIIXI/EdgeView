@@ -32,22 +32,63 @@ Rectangle
         }
     }
 
-    Image
+    Row
     {
-        source: menuIconSource
+        width: menuWidth*0.8
+        height: menuHeight
         anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        width: parent.height*0.66
-        height: parent.height*0.66
-    }
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: 15
 
-    Text
-    {
-        text: root.text
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: menuIconSource.right
-        elide: textAlignment
-        color: textColor
+        Rectangle
+        {
+            height: menuHeight
+            width: menuHeight
+            color:
+            {
+                if(isActive === true)
+                {
+                    return activeColor
+                }
+                else
+                {
+                    return normalColor
+                }
+            }
+            Image
+            {
+                source: menuIconSource
+                width: menuHeight*0.5
+                height: menuHeight*0.5
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
+        Rectangle
+        {
+            height: menuHeight
+            width: menuWidth*0.8 - menuHeight
+            color:
+            {
+                if(isActive === true)
+                {
+                    return activeColor
+                }
+                else
+                {
+                    return normalColor
+                }
+            }
+            Text
+            {
+                text: root.text
+                elide: textAlignment
+                color: textColor
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+            }
+        }
     }
 
     MouseArea
