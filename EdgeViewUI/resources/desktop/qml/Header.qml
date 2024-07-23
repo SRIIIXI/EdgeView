@@ -13,9 +13,6 @@ Rectangle
 
     property string headerTitle: ""
 
-    property bool isMenuButtonVisible: true
-    property bool isDeviceNameVisible: true
-
     property double fontSizeNormal: fontlabel.font.pointSize
     property double fontSizeSmall: fontlabel.font.pointSize -  2.5
     property double fontSizeTiny: fontlabel.font.pointSize - 5.0
@@ -57,18 +54,8 @@ Rectangle
         anchors.right: parent.right
         height: parent.height
         width: parent.height
-        visible: isMenuButtonVisible
-
-        icon.source :
-        if(applicationData.IsDarkTheme === true)
-        {
-            return "../images/UsersWhite.png";
-        }
-        else
-        {
-            return "../images/UsersBlack.png";
-        }
-
+        visible: true
+        icon.source :"../images/EdgeView.png"
         icon.color: "transparent"
         icon.height: parent.height*0.5
         icon.width: parent.height*0.5

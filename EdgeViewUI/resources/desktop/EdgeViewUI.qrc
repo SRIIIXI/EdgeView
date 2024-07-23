@@ -52,5 +52,6 @@
         <file>images/Done.png</file>
         
         <file>images/EdgeView.png</file>
+	<file>images/SampleUser.png</file>
     </qresource>
 </RCC>

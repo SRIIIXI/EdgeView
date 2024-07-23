@@ -18,31 +18,51 @@ ApplicationWindow
     property string oldPage: ""
     property bool isClosing: false
 
-    property variant menuModel :  []
-
     Component.onCompleted:
     {
-        stackView.push("Home.qml")
-        menuModel = applicationData.Menu
-        //menuArea.open()
+        updateMenu("home")
+        homePage.visible = true
+        //stackView.push("Home.qml")
+    }
+
+    Label
+    {
+        id: dummy
     }
 
     Rectangle
     {
-        id: logoArea
-        height: applicationData.Theme.BarHeight
+        id: userArea
+        height: applicationData.Theme.BarHeight*2
         width:  200
         color: applicationData.Theme.BackgroundColor
         anchors.top: parent.top
         anchors.left: parent.left
-        Image
+
+        Rectangle
         {
-            id: name
-            source: "../images/EdgeView.png"
-            width: parent.height*0.75
-            height: parent.height*0.75
+            id: userImageRect
+            width: parent.height*0.5
+            height: parent.height*0.5
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.verticalCenter: parent.verticalCenter
+            radius: height*0.5
+            border.width: 1
+            border.color: "black"
+            // Image
+            // {
+            //     id: name
+            //     source: "../images/SampleUser.png"
+            //     anchors.fill: parent
+            // }
+        }
+
+        Label
+        {
+            text: "Logged User"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.top: parent.bottom
+            color: applicationData.Theme.FontColor
         }
     }
 
@@ -50,7 +70,7 @@ ApplicationWindow
     {
         id: menuArea
         width: 200
-        height: parent.height - logoArea.height
+        height: parent.height - userArea.height
         color:
         if(applicationData.IsDarkTheme === true)
         {
@@ -61,7 +81,7 @@ ApplicationWindow
             return "lightgrey";
         }
         anchors.left: parent.left
-        anchors.top: logoArea.bottom
+        anchors.top: userArea.bottom
 
         CustomMenuItem
         {
@@ -71,7 +91,7 @@ ApplicationWindow
             anchors.top: parent.top
             anchors.left: parent.left
             text: "Home"
-            isActive: true
+            isActive: false
             menuIconSource:
             {
                 if(applicationData.IsDarkTheme === true)
@@ -88,8 +108,8 @@ ApplicationWindow
             {
                 updateMenu("home")
                 applicationData.invokeSaveCurrentPage("Home.qml")
-                stackView.pop()
-                stackView.push("Home.qml")
+                //stackView.pop()
+                //stackView.push("Home.qml")
             }
         }
 
@@ -118,8 +138,8 @@ ApplicationWindow
             {
                 updateMenu("enterprises")
                 applicationData.invokeSaveCurrentPage("Enterprises.qml")
-                stackView.pop()
-                stackView.push("Enterprises.qml")
+                //stackView.pop()
+                //stackView.push("Enterprises.qml")
             }
         }
 
@@ -148,8 +168,8 @@ ApplicationWindow
             {
                 updateMenu("sites")
                 applicationData.invokeSaveCurrentPage("Sites.qml")
-                stackView.pop()
-                stackView.push("Sites.qml")
+                //stackView.pop()
+                //stackView.push("Sites.qml")
             }
         }
 
@@ -178,8 +198,8 @@ ApplicationWindow
             {
                 updateMenu("areas")
                 applicationData.invokeSaveCurrentPage("Areas.qml")
-                stackView.pop()
-                stackView.push("Areas.qml")
+                //stackView.pop()
+                //stackView.push("Areas.qml")
             }
         }
 
@@ -208,8 +228,8 @@ ApplicationWindow
             {
                 updateMenu("devices")
                 applicationData.invokeSaveCurrentPage("Devices.qml")
-                stackView.pop()
-                stackView.push("Devices.qml")
+                //stackView.pop()
+                //stackView.push("Devices.qml")
             }
         }
 
@@ -238,8 +258,8 @@ ApplicationWindow
             {
                 updateMenu("assets")
                 applicationData.invokeSaveCurrentPage("Assets.qml")
-                stackView.pop()
-                stackView.push("Assets.qml")
+                //stackView.pop()
+                //stackView.push("Assets.qml")
             }
         }
 
@@ -268,8 +288,8 @@ ApplicationWindow
             {
                 updateMenu("rules")
                 applicationData.invokeSaveCurrentPage("Rules.qml")
-                stackView.pop()
-                stackView.push("Rules.qml")
+                //stackView.pop()
+                //stackView.push("Rules.qml")
             }
         }
 
@@ -298,8 +318,8 @@ ApplicationWindow
             {
                 updateMenu("roles")
                 applicationData.invokeSaveCurrentPage("Roles.qml")
-                stackView.pop()
-                stackView.push("Roles.qml")
+                //stackView.pop()
+                //stackView.push("Roles.qml")
             }
         }
 
@@ -328,8 +348,8 @@ ApplicationWindow
             {
                 updateMenu("users");
                 applicationData.invokeSaveCurrentPage("Users.qml")
-                stackView.pop()
-                stackView.push("Users.qml")
+                //stackView.pop()
+                //stackView.push("Users.qml")
             }
         }
 
@@ -358,8 +378,8 @@ ApplicationWindow
             {
                 updateMenu("telemetry")
                 applicationData.invokeSaveCurrentPage("Telemetry.qml")
-                stackView.pop()
-                stackView.push("Telemetry.qml")
+                //stackView.pop()
+                //stackView.push("Telemetry.qml")
             }
         }
 
@@ -388,8 +408,8 @@ ApplicationWindow
             {
                 updateMenu("alarms")
                 applicationData.invokeSaveCurrentPage("Alarms.qml")
-                stackView.pop()
-                stackView.push("Alarms.qml")
+                //stackView.pop()
+                //stackView.push("Alarms.qml")
             }
         }
 
@@ -431,22 +451,108 @@ ApplicationWindow
         headerTitle: "Edge Manager"
     }
 
-    StackView
+    //StackView
+    //{
+    //    id: stackView
+    //    height: parent.height - applicationData.Theme.BarHeight
+    //    width: parent.width -  menuArea.width
+    //    anchors.bottom: parent.bottom
+    //    anchors.right: parent.right
+    //}
+
+    Rectangle
     {
-        id: stackView
+        id: clientArea
         height: parent.height - applicationData.Theme.BarHeight
         width: parent.width -  menuArea.width
         anchors.bottom: parent.bottom
         anchors.right: parent.right
+
+        Home
+        {
+            id: homePage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Enterprises
+        {
+            id: enterprisesPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Sites
+        {
+            id: sitesPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Areas
+        {
+            id: areasPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Devices
+        {
+            id: devicesPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Assets
+        {
+            id: assetsPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Rules
+        {
+            id: rulesPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Roles
+        {
+            id: rolesPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Users
+        {
+            id: usersPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Telemetry
+        {
+            id: telemetryPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Alarms
+        {
+            id: alarmsPage
+            anchors.fill: parent
+            visible: false
+        }
     }
 
     Rectangle
     {
         id: horizontalBorder
         height: 1
-        width: mainView.width
+        width: mainView.width - userArea.width
         anchors.top: headerPanel.bottom
-        anchors.left: mainView.left
+        anchors.left: userArea.right
         radius: 0
         color: applicationData.Theme.ControlLowColor
     }
@@ -465,61 +571,84 @@ ApplicationWindow
         menuTelemetry.isActive = false;
         menuUsers.isActive = false;
 
+        homePage.visible = false;
+        enterprisesPage.visible = false;
+        sitesPage.visible = false;
+        areasPage.visible = false;
+        devicesPage.visible = false;
+        assetsPage.visible = false;
+        rulesPage.visible = false;
+        rolesPage.visible = false;
+        usersPage.visible = false;
+        telemetryPage.visible = false;
+        alarmsPage.visible = false;
+
         switch(menuname)
         {
         case "home":
         {
             menuHome.isActive = true;
+            homePage.visible = true;
             break;
         }
         case "enterprises":
         {
             menuEnterprises.isActive = true;
+            enterprisesPage.visible = true;
             break;
         }
         case "sites":
         {
             menuSites.isActive = true;
+            sitesPage.visible = true;
             break;
         }
         case "areas":
         {
             menuAreas.isActive = true;
+            areasPage.visible = true;
             break;
         }
         case "devices":
         {
             menuDevices.isActive = true;
+            devicesPage.visible = true;
             break;
         }
         case "assets":
         {
             menuAssets.isActive = true;
+            assetsPage.visible = true;
             break;
         }
         case "rules":
         {
             menuRules.isActive = true;
+            rulesPage.visible = true;
             break;
         }
         case "roles":
         {
             menuRoles.isActive = true;
+            rolesPage.visible = true;
             break;
         }
         case "users":
         {
             menuUsers.isActive = true;
+            usersPage.visible = true;
             break;
         }
         case "telemetry":
         {
             menuTelemetry.isActive = true;
+            telemetryPage.visible = true;
             break;
         }
         case "alarms":
         {
             menuAlarms.isActive = true;
+            alarmsPage.visible = true;
             break;
         }
         }
@@ -538,79 +667,79 @@ ApplicationWindow
         {
             if(pg === 0)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Home.qml")
-                stackView.push("Home.qml");
+                //stackView.push("Home.qml");
             }
 
             if(pg === 1)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Enterprises.qml")
-                stackView.push("Enterprises.qml");
+                //stackView.push("Enterprises.qml");
             }
 
             if(pg === 2)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Sites.qml")
-                stackView.push("Sites.qml");
+                //stackView.push("Sites.qml");
             }
 
             if(pg === 3)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Areas.qml")
-                stackView.push("Areas.qml");
+                //stackView.push("Areas.qml");
             }
 
             if(pg === 4)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Devices.qml")
-                stackView.push("Devices.qml");
+                //stackView.push("Devices.qml");
             }
 
             if(pg === 5)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Assets.qml")
-                stackView.push("Assets.qml");
+                //stackView.push("Assets.qml");
             }
 
             if(pg === 6)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Rules.qml")
-                stackView.push("Rules.qml");
+                //stackView.push("Rules.qml");
             }
 
             if(pg === 7)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Roles.qml")
-                stackView.push("Roles.qml");
+                //stackView.push("Roles.qml");
             }
 
             if(pg === 8)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Users.qml")
-                stackView.push("Users.qml");
+                //stackView.push("Users.qml");
             }
 
             if(pg === 9)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Telemetry.qml")
-                stackView.push("Telemetry.qml");
+                //stackView.push("Telemetry.qml");
             }
 
             if(pg === 10)
             {
-                stackView.pop();
+                //stackView.pop();
                 applicationData.invokeSaveCurrentPage("Alarms.qml")
-                stackView.push("Alarms.qml");
+                //stackView.push("Alarms.qml");
             }
         }
     }

@@ -3,9 +3,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
 
-Page
+
+Item
 {
-    id: homePage
+    id: root
 
     Rectangle
     {

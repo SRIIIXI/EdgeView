@@ -37,8 +37,8 @@ Rectangle
         source: menuIconSource
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
-        width: parent.height*0.75
-        height: parent.height*0.75
+        width: parent.height*0.66
+        height: parent.height*0.66
     }
 
     Text
