@@ -98,7 +98,7 @@ public:
         BackgroundColor_ = "#000000";
         ControlColor_ = "#1C2833";
         ControlLowColor_ = "#696969";
-        BarHeight_ = 50;
+        BarHeight_ = 45;
     }
 
     void EnableLightMode()
@@ -110,7 +110,7 @@ public:
         BackgroundColor_ = "#ffffff";
         ControlColor_ = "#f5f5f5";
         ControlLowColor_ = "#c0c0c0";
-        BarHeight_ = 50;
+        BarHeight_ = 45;
     }
 };
 

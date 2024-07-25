@@ -19,6 +19,10 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         theme_.EnableDarkMode();
     }
 
+    QImage appImg("../images/EdgeView.png");
+    QIcon icn(QPixmap::fromImage(appImg));
+    appPtr->setWindowIcon(icn);
+
     if(isDarkTheme_)
     {
         menuItemList_.append(ApplicationMenu(true, "Home", "Home.qml", "../images/HomeWhite.png", true));

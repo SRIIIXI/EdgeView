@@ -13,6 +13,8 @@ Item
         fontColor: applicationData.Theme.FontColor
         rowColor: applicationData.Theme.BackgroundColor
         headerHeight: applicationData.Theme.BarHeight*0.66
+        isDarkTheme: applicationData.IsDarkTheme
+        accentColor: applicationData.Theme.AccentColor
         anchors.fill: parent
         headerModel: [ // widths must add to 1
             {text: 'Device',         width: 0.33},

@@ -10,6 +10,7 @@
 #include <QTimer>
 #include <QUuid>
 #include <QPalette>
+#include <QIcon>
 
 #include "ApplicationTheme.hpp"
 #include "ApplicationMenu.hpp"

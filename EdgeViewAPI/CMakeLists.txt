@@ -12,13 +12,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 if(UNIX AND NOT APPLE)
-    if(${CMAKE_SYSTEM_NAME} MATCHES "Android")
-        message("-- Configuring for Android ...")
-        set(ANDROID_LINUX TRUE)
-    else()
         message("-- Configuring for Linux ...")
         set(GNU_LINUX TRUE)
-    endif()
 endif()
 
 if(UNIX AND APPLE)
@@ -32,39 +27,62 @@ if(WIN32)
     set(DARWIN TRUE)
 endif()
 
-find_package(Qt6 6 REQUIRED COMPONENTS Quick Core Qml Network)
+find_package(Qt6 6 REQUIRED COMPONENTS Core Network)
 qt_standard_project_setup(REQUIRES 6)
 
-set(SOURCE_DIR ./src)
-set(HEADER_DIR ./include)
-include_directories(${PROJECT_HEADER_DIR} ./include ./darwin)
+set(CORE_SOURCE_DIR ./core/src)
+set(CORE_HEADER_DIR ./core/include)
+set(HTTP_SOURCE_DIR ./http/src)
+set(HTTP_HEADER_DIR ./http/include)
+set(DATAACCESS_SOURCE_DIR ./dataaccess/src)
+set(DATAACCESS_HEADER_DIR ./dataaccess/include)
+set(MODEL_SOURCE_DIR ./model/src)
+set(MODEL_HEADER_DIR ./model/include)
 
-set(SOURCES
-${SOURCES}
-${SOURCE_DIR}/main.cpp
+include_directories(${PROJECT_HEADER_DIR} ./include ./http/include ./dataaccess/include ./model/include)
+
+set(CORE_SOURCES
+${CORE_SOURCES}
+${CORE_SOURCE_DIR}/main.cpp
+${CORE_SOURCE_DIR}/EdgeViewAPIServer.cpp
+${CORE_SOURCE_DIR}/RequestProcessor.cpp
 )
 
-set(HEADERS
-${HEADERS}
+set(CORE_HEADERS
+${CORE_HEADERS}
+${CORE_HEADER_DIR}/EdgeViewAPIServer.hpp
+${CORE_HEADER_DIR}/RequestProcessor.hpp
 )
 
-qt_add_executable(${Project} ${SOURCES} ${HEADERS})
-
-set_target_properties(${Project} PROPERTIES
-    MACOSX_BUNDLE_GUI_IDENTIFIER edgeview.sriiixi.com
-    MACOSX_BUNDLE_BUNDLE_VERSION ${PROJECT_VERSION}
-    MACOSX_BUNDLE_SHORT_VERSION_STRING ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
-    MACOSX_FRAMEWORK_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/darwin/Info.plist
-    MACOSX_BUNDLE_INFO_PLIST ${CMAKE_CURRENT_SOURCE_DIR}/darwin/Info.plist
-    MACOSX_BUNDLE TRUE
-    WIN32_EXECUTABLE TRUE
+set(HTTP_SOURCES
+${HTTP_SOURCES}
 )
+
+set(HTTP_HEADERS
+${HTTP_HEADERS}
+)
+
+set(DATAACCESS_SOURCES
+${DATAACCESS_SOURCES}
+)
+
+set(DATAACCESS_HEADERS
+${DATAACCESS_HEADERS}
+)
+
+set(MODEL_SOURCES
+${MODEL_SOURCES}
+)
+
+set(MODEL_HEADERS
+${MODEL_HEADERS}
+)
+
+qt_add_executable(${Project} ${CORE_SOURCES} ${CORE_HEADERS} ${HTTP_SOURCES} ${HTTP_HEADERS} ${DATAACCESS_SOURCES} ${DATAACCESS_HEADERS} ${MODEL_SOURCES} ${MODEL_HEADERS})
 
 target_link_libraries(${Project}
-    PRIVATE Qt6::Quick
     PRIVATE Qt6::Core
     PRIVATE Qt6::CorePrivate
-    PRIVATE Qt6::Qml
     PRIVATE Qt6::Network
 )
 

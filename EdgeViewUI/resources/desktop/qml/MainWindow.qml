@@ -58,6 +58,7 @@ ApplicationWindow
                 height: userImageRect.height*0.66
                 width: userImageRect.height*0.66
                 source: "../images/SampleUser.png"
+                fillMode: Image.PreserveAspectCrop
             }
         }
 
@@ -342,10 +343,39 @@ ApplicationWindow
 
         CustomMenuItem
         {
-            id: menuTelemetry
+            id: menuApplications
             menuWidth: 200
             menuHeight: applicationData.Theme.BarHeight
             anchors.top: menuUsers.bottom
+            anchors.left: parent.left
+            text: "Applications"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/ApplicationsWhite.png";
+                }
+                else
+                {
+                    return "../images/ApplicationsBlack.png";
+                }
+            }
+            normalColor: applicationData.Theme.ControlColor
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("applications")
+                applicationData.invokeSaveCurrentPage("Applications.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuTelemetry
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuApplications.bottom
             anchors.left: parent.left
             text: "Telemetry"
             isActive: false
@@ -400,10 +430,39 @@ ApplicationWindow
 
         CustomMenuItem
         {
-            id: menuExit
+            id: menuConfiguration
             menuWidth: 200
             menuHeight: applicationData.Theme.BarHeight
             anchors.top: menuAlarms.bottom
+            anchors.left: parent.left
+            text: "Configuration"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/ConfigurationWhite.png";
+                }
+                else
+                {
+                    return "../images/ConfigurationBlack.png";
+                }
+            }
+            normalColor: applicationData.Theme.ControlColor
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("configuration")
+                applicationData.invokeSaveCurrentPage("Configuration.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuExit
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuConfiguration.bottom
             anchors.left: parent.left
             text: "Exit"
             isActive: false
@@ -614,6 +673,13 @@ ApplicationWindow
             visible: false
         }
 
+        Applications
+        {
+            id: applicationsPage
+            anchors.fill: parent
+            visible: false
+        }
+
         Telemetry
         {
             id: telemetryPage
@@ -624,6 +690,13 @@ ApplicationWindow
         Alarms
         {
             id: alarmsPage
+            anchors.fill: parent
+            visible: false
+        }
+
+        Configuration
+        {
+            id: configurationPage
             anchors.fill: parent
             visible: false
         }
@@ -710,6 +783,8 @@ ApplicationWindow
         menuSites.isActive = false;
         menuTelemetry.isActive = false;
         menuUsers.isActive = false;
+        menuApplications.isActive = false;
+        menuConfiguration.isActive = false;
 
         homePage.visible = false;
         enterprisesPage.visible = false;
@@ -720,8 +795,10 @@ ApplicationWindow
         rulesPage.visible = false;
         rolesPage.visible = false;
         usersPage.visible = false;
+        applicationsPage.visible = false;
         telemetryPage.visible = false;
         alarmsPage.visible = false;
+        configurationPage.visible = false;
 
         switch(menuname)
         {
@@ -779,6 +856,12 @@ ApplicationWindow
             usersPage.visible = true;
             break;
         }
+        case "applications":
+        {
+            menuApplications.isActive = true;
+            applicationsPage.visible = true;
+            break;
+        }
         case "telemetry":
         {
             menuTelemetry.isActive = true;
@@ -789,6 +872,12 @@ ApplicationWindow
         {
             menuAlarms.isActive = true;
             alarmsPage.visible = true;
+            break;
+        }
+        case "configuration":
+        {
+            menuConfiguration.isActive = true;
+            configurationPage.visible = true;
             break;
         }
         }

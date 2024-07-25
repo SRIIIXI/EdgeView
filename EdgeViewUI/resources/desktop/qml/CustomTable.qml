@@ -1,4 +1,6 @@
 import QtQuick 2.0
+import QtQuick.Controls;
+import QtQuick.Controls.Material;
 
 Item
 {
@@ -6,7 +8,6 @@ Item
 
     // public
     property variant headerModel: []
-
     property variant dataModel: []
 
     property int currentRow: 0
@@ -15,6 +16,8 @@ Item
     property string headerColor: "dodgerblue"
     property string fontColor: "black"
     property string rowColor: "lightgrey"
+    property string accentColor: "dodgerblue"
+    property bool isDarkTheme: true
 
     signal clicked(int row);
 
@@ -47,10 +50,45 @@ Item
                 width: modelData.width * root.width;
                 height: header.height
 
+                CheckBox
+                {
+                    id: selectMark
+                    anchors.verticalCenter: parent.verticalCenter
+                    visible:
+                    {
+                        if(index === 0)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    onCheckedChanged:
+                    {
+                        root.currentRow = index;
+                        root.clicked(index);
+                    }
+                    Material.accent: accentColor
+                    Material.theme:
+                    {
+                        if(isDarkTheme === true)
+                        {
+                            return Material.Dark;
+                        }
+                        else
+                        {
+                            return Material.Light;
+                        }
+                    }
+                }
+
                 Text
                 {
                     x: 0.03 * root.width
                     text: modelData.text
+                    anchors.left: selectMark.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: fontColor
                     font.bold: true
@@ -87,7 +125,7 @@ Item
             // row
             width: root.width;
             height: header.height
-            opacity: !mouseArea.pressed? 1: 0.3 // pressed state
+            //opacity: !mouseArea.pressed? 1: 0.3 // pressed state
 
             property int     row:     index     // outer index
             property variant rowData: modelData // much faster than listView.model[row]
@@ -109,25 +147,59 @@ Item
                         width: headerModel[index].width * root.width;
                         height: header.height
 
+                        CheckBox
+                        {
+                            id: selectMarkRow
+                            anchors.verticalCenter: parent.verticalCenter
+                            visible:
+                            {
+                                if(index === 0)
+                                {
+                                    return true;
+                                }
+                                else
+                                {
+                                    return false;
+                                }
+                            }
+                            onCheckedChanged:
+                            {
+                                root.currentRow = index;
+                                root.clicked(index);
+                            }
+                            Material.accent: accentColor
+                            Material.theme:
+                            {
+                                if(isDarkTheme === true)
+                                {
+                                    return Material.Dark;
+                                }
+                                else
+                                {
+                                    return Material.Light;
+                                }
+                            }
+                        }
+
                         Text
                         {
                             x: 0.03 * root.width
                             text: modelData
                             anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: selectMarkRow.right
                             color: fontColor
+
+                            MouseArea
+                            {
+                                anchors.fill: parent
+                                onClicked:
+                                {
+                                    root.currentRow = index;
+                                    root.clicked(index);
+                                }
+                            }
                         }
                     }
-                }
-            }
-
-            MouseArea
-            {
-                id: mouseArea
-                anchors.fill: parent
-                onClicked:
-                {
-                    root.currentRow = row;
-                    root.clicked(tableRow.index)
                 }
             }
         }
