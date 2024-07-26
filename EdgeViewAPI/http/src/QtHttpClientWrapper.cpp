@@ -1,9 +1,9 @@
 
-#include "QtHttpClientWrapper.h"
-#include "QtHttpRequest.h"
-#include "QtHttpReply.h"
-#include "QtHttpServer.h"
-#include "QtHttpHeader.h"
+#include "QtHttpClientWrapper.hpp"
+#include "QtHttpRequest.hpp"
+#include "QtHttpReply.hpp"
+#include "QtHttpServer.hpp"
+#include "QtHttpHeader.hpp"
 
 #include <QCryptographicHash>
 #include <QTcpSocket>

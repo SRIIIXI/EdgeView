@@ -1,7 +1,7 @@
 
-#include "QtHttpRequest.h"
-#include "QtHttpHeader.h"
-#include "QtHttpServer.h"
+#include "QtHttpRequest.hpp"
+#include "QtHttpHeader.hpp"
+#include "QtHttpServer.hpp"
 
 QtHttpRequest::QtHttpRequest (QtHttpClientWrapper * client, QtHttpServer * parent)
     : QObject         (parent)

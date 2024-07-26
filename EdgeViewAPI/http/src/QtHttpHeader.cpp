@@ -1,5 +1,5 @@
 
-#include "QtHttpHeader.h"
+#include "QtHttpHeader.hpp"
 
 #include <QByteArray>
 

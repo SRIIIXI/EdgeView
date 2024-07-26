@@ -1,4 +1,4 @@
-#include "DataEntity.h"
+#include "DataEntity.hpp"
 
 DataEntity::DataEntity(QSqlDatabase *db, QString tabname)
 {

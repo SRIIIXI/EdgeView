@@ -1,4 +1,4 @@
-#include "Users.h"
+#include "Users.hpp"
 
 Users::Users(QSqlDatabase *db, QString tabname) : DataEntity(db, tabname)
 {

@@ -11,14 +11,16 @@
 #include <QHostInfo>
 #include <QNetworkInterface>
 #include <QCoreApplication>
-#include "QtHttpClientWrapper.h"
-#include "QtHttpServer.h"
-#include "QtHttpRequest.h"
-#include "QtHttpReply.h"
-#include "QtHttpHeader.h"
-#include "DataInterface.h"
-#include "DbInit.h"
-#include "RequestProcessor.h"
+#include <QStandardPaths>
+
+#include "QtHttpClientWrapper.hpp"
+#include "QtHttpServer.hpp"
+#include "QtHttpRequest.hpp"
+#include "QtHttpReply.hpp"
+#include "QtHttpHeader.hpp"
+#include "DataInterface.hpp"
+#include "DbInit.hpp"
+#include "RequestProcessor.hpp"
 
 class EdgeViewAPIServer : public QCoreApplication
 {
@@ -44,18 +46,6 @@ private:
     void signIn(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply);
     void signUp(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply);
     void signUpVerify(QtHttpRequest *request, QtHttpReply *reply);
-    void getMasterAdList(QtHttpRequest *request, QtHttpReply *reply);
-    void getPendingAdList(QtHttpReply *reply, QString &username);
-    void getSubmittedAdList(QtHttpReply *reply, QString &username);
-    void getCreateAdPage(QtHttpRequest *request, QtHttpReply *reply);
-    void getAd(QtHttpRequest *request, QtHttpReply *reply);
-    void createAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply);
-    void bidForAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply);
-    void buyAd(QtHttpRequest *request, QtHttpReply *reply);
-    void approveAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply);
-    void setAdPrice(QtHttpRequest *request, QtHttpReply *reply);
-    void setBanner(QtHttpRequest *request, QtHttpReply *reply);
-    void getBanner(QtHttpRequest *request, QtHttpReply *reply);
 
     void sendFile(QtHttpRequest *request, QtHttpReply *reply);
     void sendPage(QtHttpReply *reply, QString htmlFile);

@@ -1,4 +1,4 @@
-#include "DbInit.h"
+#include "DbInit.hpp"
 
 DbInit::DbInit()
 {

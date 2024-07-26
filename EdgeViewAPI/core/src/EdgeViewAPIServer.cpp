@@ -1,11 +1,11 @@
-#include "AdBuyServer.h"
+#include "EdgeViewAPIServer.hpp"
 
 EdgeViewAPIServer::EdgeViewAPIServer(int argc, char *argv[]) : QCoreApplication (argc, argv)
 {
     _Port = 8080;
     _ConsoleOut = new QTextStream(stdout);
     _VerboseLog = false;
-    _ServerName = "AdBuy Server";
+    _ServerName = "EdgeViewAPI Server";
     _RequestProcessor = nullptr;
     _Host = "";
 
@@ -24,7 +24,7 @@ EdgeViewAPIServer::~EdgeViewAPIServer()
 
 bool EdgeViewAPIServer::start()
 {
-    *_ConsoleOut << "AdBuyHere Server v1.0" << Qt::endl;
+    *_ConsoleOut << "EdgeViewAPI Server v1.0" << Qt::endl;
 
     QStringList iplist;
 
@@ -229,107 +229,6 @@ void EdgeViewAPIServer::onRequest(QtHttpRequest * request, QtHttpReply * reply)
         return;
     }
 
-    if(url.contains("masteradlist"))
-    {
-        getMasterAdList(request, reply);
-        return;
-    }
-
-    if(url.contains("getad"))
-    {
-        if(request->getCommand() == "POST")
-        {
-            approveAd(postitems, request, reply);
-        }
-        else
-        {
-            getAd(request, reply);
-        }
-        return;
-    }
-
-    if(url.contains("approvead"))
-    {
-        approveAd(postitems, request, reply);
-        return;
-    }
-
-    if(url.contains("/createad") || url.contains("form_create_ad"))
-    {
-        if(request->getCommand() == "GET")
-        {
-            getCreateAdPage(request, reply);
-        }
-
-        if(request->getCommand() == "POST")
-        {
-            createAd(postitems, request, reply);
-        }
-
-        return;
-    }
-
-    if(url.contains("/bidforad"))
-    {
-        if(request->getCommand() == "GET")
-        {
-            buyAd(request, reply);
-        }
-
-        if(request->getCommand() == "POST")
-        {
-            bidForAd(postitems, request, reply);
-        }
-
-        return;
-    }
-
-    if(url.contains("/pendingadlist"))
-    {
-        QString qry = request->getUrl().query();
-        QString username = request->getClient()->getUserName();
-
-        if(username.length() < 1)
-        {
-            username = qry.replace("login_id=", "");
-        }
-
-        getPendingAdList(reply, username);
-        return;
-    }
-
-    if(url.contains("/submittedadlist"))
-    {
-        QString qry = request->getUrl().query();
-        QString username = request->getClient()->getUserName();
-
-        if(username.length() < 1)
-        {
-            username = qry.replace("login_id=", "");
-        }
-
-        getSubmittedAdList(reply, username);
-        return;
-    }
-
-    if(url.contains("/setbanner"))
-    {
-        setBanner(request, reply);
-        return;
-    }
-
-    if(url.contains("/signupverify"))
-    {
-        signUpVerify(request, reply);
-        return;
-    }
-
-    if(url.contains("/getbanner"))
-    {
-        getBanner(request, reply);
-        return;
-    }
-
     /*
     if(!request->getClient()->isAuthenticated())
     {
@@ -365,16 +264,6 @@ void EdgeViewAPIServer::signIn(QMap<QString, QString> &postitems, QtHttpRequest 
 
     if(loginstate)
     {
-        if(usertype == "A")
-        {
-            getSubmittedAdList(reply, loginid);
-        }
-
-        if(usertype == "P")
-        {
-            getPendingAdList(reply, loginid);
-        }
-
         if(usertype == "X")
         {
             sendServerStatus(request, reply);
@@ -427,294 +316,6 @@ void EdgeViewAPIServer::signUpVerify(QtHttpRequest *request, QtHttpReply *reply)
     _RequestProcessor->processSignUpVerify(token, statusmessage);
     QByteArray buffer((const char*)statusmessage.toStdString().c_str(), statusmessage.toStdString().length());
     reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getPendingAdList(QtHttpReply *reply, QString &username)
-{
-    QString data;
-    _RequestProcessor->processGetPendingAdList(username, data);
-
-    QString pgdata = "";
-
-    getTemplatePage("form_adlocallist_publisher.html", pgdata);
-
-    pgdata = pgdata.replace("_AD_LIST_TYPE_PLACE_HOLEDER_", "Pending Ad List");
-    pgdata = pgdata.replace("_USER_NAME_", username);
-    pgdata = pgdata.replace("_USER_TYPE_", "Advertiser");
-    pgdata = pgdata.replace("<!--_ROW_PLACE_HOLDER_-->", data);
-
-    reply->setStatusCode(QtHttpReply::Ok);
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getSubmittedAdList(QtHttpReply *reply, QString &username)
-{
-    QString data;
-    _RequestProcessor->processGetSubmittedAdList(username, data);
-
-    QString pgdata = "";
-
-    getTemplatePage("form_adlocallist_advertiser.html", pgdata);
-
-    pgdata = pgdata.replace("_AD_LIST_TYPE_PLACE_HOLEDER_", "Submitted Ad List");
-    pgdata = pgdata.replace("_USER_NAME_", username);
-    pgdata = pgdata.replace("_USER_TYPE_", "Publisher");
-    pgdata = pgdata.replace("<!--_ROW_PLACE_HOLDER_-->", data);
-
-    reply->setStatusCode(QtHttpReply::Ok);
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getMasterAdList(QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString username = request->getClient()->getUserName();
-
-    if(username.length() < 1)
-    {
-        QStringList queries = request->getUrl().query().split('&');
-        QString temp = queries[0];
-        username = temp.replace("login_id=", "");
-    }
-
-    QString data;
-    _RequestProcessor->processGetMasterAdList(data);
-
-    QString pgdata = "";
-
-    getTemplatePage("form_adlist.html", pgdata);
-
-    pgdata = pgdata.replace("_AD_LIST_TYPE_PLACE_HOLEDER_", "Master Ad List");
-    pgdata = pgdata.replace("<!--_ROW_PLACE_HOLDER_-->", data);
-    pgdata = pgdata.replace("_LOGIN_ID_", username);
-
-    reply->setStatusCode(QtHttpReply::Ok);
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getCreateAdPage(QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString url = request->getUrl().toString();
-
-    QString username = url.replace("/createad&login_id=", "");
-
-    QString pgdata = "";
-
-    getTemplatePage("form_create_ad.html", pgdata);
-
-    //pgdata = pgdata.replace("_BANNER_POST_SERVER_URL_", "http://" +  _Host + ":" + QVariant(_Port).toString() + "/setbanner&login_id=" + username);
-    pgdata = pgdata.replace("_BANNER_POST_SERVER_URL_", "./setbanner?login_id=" + username);
-    pgdata = pgdata.replace("_USER_NAME_", username);
-
-    reply->setStatusCode(QtHttpReply::Ok);
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getAd(QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString url = request->getUrl().toString();
-
-    if(!url.contains("/getad?adid="))
-    {
-        reply->setStatusCode(QtHttpReply::BadRequest);
-        return;
-    }
-
-    QString adid = url.replace("/getad?adid=", "");
-
-    QString bannerfile = "http://" + request->getHeader (QtHttpHeader::Host) + "/ads/" + adid+".jpg";
-
-    QString pgdata = "";
-
-    getTemplatePage("form_approve_ad.html", pgdata);
-
-    pgdata = pgdata.replace("_USER_NAME_", request->getClient()->getUserName());
-
-    _RequestProcessor->processGetAd(adid, pgdata);
-
-    pgdata = pgdata.replace("_BANNER_FILE_", bannerfile);
-    pgdata = pgdata.replace("_LOGIN_ID_", request->getClient()->getUserName());
-    pgdata = pgdata.replace("_AD_ID_", adid);
-
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::createAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString username = request->getClient()->getUserName();
-    QString statusmessage = "";
-
-    _RequestProcessor->processCreateAd(postitems, username, statusmessage);
-
-    QString pgdata = "";
-
-    getTemplatePage("form_create_ad_result.html", pgdata);
-    pgdata = pgdata.replace("_RESULT_", statusmessage);
-    pgdata = pgdata.replace("_USER_NAME_", username);
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::buyAd(QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString temp = "";
-    QStringList queries = request->getUrl().query().split('&');
-    temp = queries[0];
-    QString adid = temp.replace("adid=", "");
-    temp = queries[1];
-    QString username = temp.replace("login_id=", "");
-
-    QString bannerfile = "http://" + request->getHeader (QtHttpHeader::Host) + "/ads/" + adid+".jpg";
-
-    QString pgdata = "";
-    getTemplatePage("form_bid_ad.html", pgdata);
-
-    pgdata = pgdata.replace("_BANNER_FILE_", bannerfile);
-    pgdata = pgdata.replace("_LOGIN_ID_", username);
-    pgdata = pgdata.replace("_ADVERTISER_", username);
-    pgdata = pgdata.replace("_HYPER_LINK_", "http://"+_Host + ":" + QVariant(_Port).toString() + "/adid="+adid);
-    pgdata = pgdata.replace("_BANNER_POST_SERVER_URL_", "./setbanner?login_id=" + username);
-
-    _RequestProcessor->processGetMasterAd(adid, pgdata);
-
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::bidForAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString username = request->getClient()->getUserName();
-
-    if(username.length() < 1)
-    {
-        username = postitems.value("advertiser");
-    }
-
-    QString statusmessage = "";
-    _RequestProcessor->processBidForAd(postitems, statusmessage);
-
-    QString pgdata = "";
-
-    getTemplatePage("form_bid_ad_result.html", pgdata);
-    pgdata = pgdata.replace("_RESULT_", statusmessage);
-    pgdata = pgdata.replace("_USER_NAME_", username);
-
-    QByteArray buffer((const char*)pgdata.toStdString().c_str(), pgdata.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::approveAd(QMap<QString, QString> &postitems, QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString url = request->getUrl().path();
-    QString apprtext = "";
-    QString apprflag = "";
-    QString username = "";
-    QString adid = "";
-    QString statusmessage = "";
-
-    if(postitems.contains("approvalstate"))
-    {
-        apprtext = postitems.value("approvalstate");
-    }
-
-    if(postitems.contains("login_id"))
-    {
-        username = postitems.value("login_id");
-    }
-
-    if(postitems.contains("adid_id"))
-    {
-        adid = postitems.value("adid_id");
-    }
-
-    if(apprtext.toLower() == "approved")
-    {
-        apprflag = "Y";
-    }
-    else
-    {
-        apprflag = "N";
-    }
-
-    _RequestProcessor->processApproveAd(adid, apprflag, apprtext, statusmessage);
-    getPendingAdList(reply, username);
-}
-
-void EdgeViewAPIServer::setAdPrice(QtHttpRequest *request, QtHttpReply *reply)
-{
-    //QString data = QTextCodec::codecForMib(106)->toUnicode(request->getRawData());
-    QString data = request->getRawData().toStdString().c_str();
-    QStringList fields = data.split('\n', Qt::SkipEmptyParts, Qt::CaseSensitive);
-
-    if(fields.count() < 4)
-    {
-        reply->setStatusCode(QtHttpReply::BadRequest);
-        return;
-    }
-
-    QString username = fields.value(0);
-    QString adid = fields.value(1);
-    QString price = fields.value(2);
-    QString statusmessage = "";
-
-    _RequestProcessor->processSetAdPrice(adid, price, statusmessage);
-    QByteArray buffer((const char*)statusmessage.toStdString().c_str(), statusmessage.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::setBanner(QtHttpRequest *request, QtHttpReply *reply)
-{   
-    QByteArray data = request->getRawData();
-
-    QString extension = "jpg";
-
-    if(request->getHeadersList().contains("Content-Type"))
-    {
-        extension = request->getHeader("Content-Type");
-        extension = extension.replace("image/", "");
-    }
-
-    QString query = request->getUrl().query();
-
-    QString username = query.replace("login_id=", "");
-
-    QString cachefile = _DataDirectory + "/cache/" + username + "." + extension;
-
-    QFile fl(cachefile);
-    fl.open(QIODevice::WriteOnly);
-    fl.write(request->getRawData());
-    fl.flush();
-    fl.close();
-
-    QImage px(cachefile);
-    QString height = QVariant(px.width()).toString();
-    QString width = QVariant(px.height()).toString();
-
-    QString statusmessage = width+"x"+height;
-
-    QByteArray buffer((const char*)statusmessage.toStdString().c_str(), statusmessage.toStdString().length());
-    reply->appendRawData(buffer);
-}
-
-void EdgeViewAPIServer::getBanner(QtHttpRequest *request, QtHttpReply *reply)
-{
-    QString url = request->getUrl().toString();
-
-    if(!url.contains("/getbanner?fname="))
-    {
-        reply->setStatusCode(QtHttpReply::BadRequest);
-        return;
-    }
-
-    QString filename = url.replace("/getbanner?fname=", "");
-
-    QByteArray imagedata;
-    _RequestProcessor->processGetBanner(filename, imagedata);
-    reply->appendRawData(imagedata);
 }
 
 void EdgeViewAPIServer::sendPage(QtHttpReply *reply, QString htmlFile)
@@ -889,7 +490,7 @@ void EdgeViewAPIServer::sendServerStatus(QtHttpRequest *request, QtHttpReply *re
 
     getTemplatePage("form_index.html", pgdata);
 
-    pgdata = pgdata.replace("_HEADING_", "AdBuyHere : Administrator Login");
+    pgdata = pgdata.replace("_HEADING_", "EdgeViewAPI : Administrator Login");
     temp = request->getHeader (QtHttpHeader::Host);
     pgdata = pgdata.replace("_LINE1_", "Virtual host : " + temp);
     temp = request->getHeader (QtHttpHeader::UserAgent);

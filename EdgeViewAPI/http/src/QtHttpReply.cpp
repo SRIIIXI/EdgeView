@@ -1,7 +1,7 @@
 
-#include "QtHttpReply.h"
-#include "QtHttpHeader.h"
-#include "QtHttpServer.h"
+#include "QtHttpReply.hpp"
+#include "QtHttpHeader.hpp"
+#include "QtHttpServer.hpp"
 
 #include <QDateTime>
 

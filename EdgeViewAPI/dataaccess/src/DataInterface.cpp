@@ -1,4 +1,4 @@
-#include "DataInterface.h"
+#include "DataInterface.hpp"
 
 DataInterface::DataInterface()
 {

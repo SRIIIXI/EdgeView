@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QtSql>
-#include "DataEntity.h"
+#include "DataEntity.hpp"
 
 class Users : public DataEntity
 {

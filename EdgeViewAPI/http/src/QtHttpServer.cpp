@@ -1,8 +1,8 @@
 
-#include "QtHttpServer.h"
-#include "QtHttpRequest.h"
-#include "QtHttpReply.h"
-#include "QtHttpClientWrapper.h"
+#include "QtHttpServer.hpp"
+#include "QtHttpRequest.hpp"
+#include "QtHttpReply.hpp"
+#include "QtHttpClientWrapper.hpp"
 
 #include <QTcpServer>
 #include <QTcpSocket>
