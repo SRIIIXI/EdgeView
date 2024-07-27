@@ -97,7 +97,7 @@ public:
         AccentLowColor_ = "#00bfff";
         BackgroundColor_ = "#000000";
         ControlColor_ = "#1C2833";
-        ControlLowColor_ = "#696969";
+        ControlLowColor_ = "#304256";
         BarHeight_ = 45;
     }
 
@@ -109,7 +109,7 @@ public:
         AccentLowColor_ = "#00bfff";
         BackgroundColor_ = "#ffffff";
         ControlColor_ = "#f5f5f5";
-        ControlLowColor_ = "#c0c0c0";
+        ControlLowColor_ = "#989ea8";
         BarHeight_ = 45;
     }
 };

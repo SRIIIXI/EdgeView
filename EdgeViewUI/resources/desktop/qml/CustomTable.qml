@@ -86,12 +86,44 @@ Item
 
                 Text
                 {
+                    id: celltext
                     x: 0.03 * root.width
                     text: modelData.text
                     anchors.left: selectMark.right
                     anchors.verticalCenter: parent.verticalCenter
                     color: fontColor
                     font.bold: true
+                }
+
+                Image
+                {
+                    id: imgDelete
+                    anchors.left: celltext.right
+                    height: header.height*0.75
+                    width: header.height*0.75
+                    source:
+                    {
+                        if(isDarkTheme === true)
+                        {
+                            return "../images/DeleteWhite.png"
+                        }
+                        else
+                        {
+                            return "../images/DeleteBlack.png"
+                        }
+                    }
+
+                    visible:
+                    {
+                        if(index === headerModel.length - 1)
+                        {
+                            return true
+                        }
+                        else
+                        {
+                            return false
+                        }
+                    }
                 }
             }
         }

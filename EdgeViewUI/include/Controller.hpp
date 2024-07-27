@@ -12,6 +12,8 @@
 #include <QPalette>
 #include <QIcon>
 
+#include "Device.hpp"
+
 #include "ApplicationTheme.hpp"
 #include "ApplicationMenu.hpp"
 
@@ -41,6 +43,9 @@ public:
     Q_PROPERTY (QList<ApplicationMenu> Menu READ getMenu NOTIFY MenuChanged)
     QList<ApplicationMenu> getMenu();
 
+    Q_PROPERTY(QList<Device> DeviceList READ getDeviceList NOTIFY DeviceListChanged);
+    QList<Device> getDeviceList();
+
     void Initialize();
 
 signals:
@@ -51,6 +56,10 @@ signals:
     //UI events and operations states
     void menuAction();
     void pageAction(int ipage);
+
+    //Domain objects
+    void DeviceListChanged();
+    void deviceAction();
 
     //Specifc errors
 
@@ -74,6 +83,9 @@ private:
 
     bool isDarkTheme_;
     ApplicationTheme theme_;
+
+    //Domain object lists
+    QList<Device> deviceList_;
 };
 
 extern Controller* controllerInstance;

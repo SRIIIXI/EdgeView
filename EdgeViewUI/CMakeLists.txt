@@ -46,6 +46,7 @@ ${SOURCE_DIR}/EdgeView.cpp
 ${SOURCE_DIR}/Controller.cpp
 ${SOURCE_DIR}/ControllerComm.cpp
 ${SOURCE_DIR}/ControllerAppMgmt.cpp
+${SOURCE_DIR}/Device.cpp
 )
 
 set(HEADERS
@@ -54,6 +55,7 @@ ${HEADER_DIR}/EdgeView.hpp
 ${HEADER_DIR}/ApplicationTheme.hpp
 ${HEADER_DIR}/ApplicationMenu.hpp
 ${HEADER_DIR}/Controller.hpp
+${HEADER_DIR}/Device.hpp
 )
 
 if(IOS)

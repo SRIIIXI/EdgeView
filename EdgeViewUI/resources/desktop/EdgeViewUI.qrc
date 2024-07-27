@@ -42,6 +42,8 @@
 	<file>images/RightBlack.png</file>  
 	<file>images/ApplicationsBlack.png</file>  
 	<file>images/ConfigurationBlack.png</file>  
+	<file>images/EditBlack.png</file>  
+	<file>images/DeleteBlack.png</file>  
 
 	<file>images/DevicesWhite.png</file>
 	<file>images/SitesWhite.png</file>
@@ -62,6 +64,8 @@
 	<file>images/RightWhite.png</file>  
 	<file>images/ApplicationsWhite.png</file>  
 	<file>images/ConfigurationWhite.png</file>  
+	<file>images/EditWhite.png</file>  
+	<file>images/DeleteWhite.png</file>  
 
 	<file>images/GreenDot.png</file>
 	<file>images/Pass.png</file>

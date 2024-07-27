@@ -19,6 +19,9 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         theme_.EnableDarkMode();
     }
 
+    isDarkTheme_ = false;
+    theme_.EnableLightMode();
+
     QImage appImg("../images/EdgeView.png");
     QIcon icn(QPixmap::fromImage(appImg));
     appPtr->setWindowIcon(icn);
@@ -52,6 +55,11 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         menuItemList_.append(ApplicationMenu(true, "Alarms", "Alarms.qml", "../images/AlarmsBlack.png"));
 
     }
+
+    deviceList_.append(Device("Router", "1111111", "AAAAAA", "Active"));
+    deviceList_.append(Device("Modem", "22222222", "BBBBBB", "Decommisioned"));
+    deviceList_.append(Device("Router", "33333333", "CCCCCC", "InActive"));
+    deviceList_.append(Device("Router", "44444444", "DDDDDD", "In Stock"));
 }
 
 void Controller::Initialize()
@@ -59,6 +67,8 @@ void Controller::Initialize()
     emit IsDarkThemeChanged();
     emit ThemeChanged();
     emit MenuChanged();
+    emit DeviceListChanged();
+    emit deviceAction();
 }
 
 void Controller::invokeCancel()
@@ -69,4 +79,9 @@ void Controller::invokeExit()
 {
     lastPage_ = "";
     exit(0);
+}
+
+QList<Device> Controller::getDeviceList()
+{
+    return deviceList_;
 }
