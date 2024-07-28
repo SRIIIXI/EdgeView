@@ -10,6 +10,8 @@ Item
 
     property variant deviceModel: []
 
+    signal editRequested(int mode);
+
     Component.onCompleted:
     {
         deviceModel = applicationData.DeviceList
@@ -30,7 +32,7 @@ Item
 
         Rectangle
         {
-            border.color: applicationData.Theme.ControlColor
+            border.color: "lightgrey"//applicationData.Theme.ControlColor
             height: 1
             width: parent.width
             anchors.top: tableHeader.top
@@ -38,7 +40,7 @@ Item
 
         Rectangle
         {
-            border.color: applicationData.Theme.ControlColor
+            border.color: "lightgrey"//applicationData.Theme.ControlColor
             height: 1
             width: parent.width
             anchors.bottom: tableHeader.bottom
@@ -69,7 +71,7 @@ Item
             text: "Device"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: mark.right
-            width: parent.width*0.23
+            width: parent.width*0.20
             color: applicationData.Theme.FontColor
         }
 
@@ -79,7 +81,7 @@ Item
             text: "Serial No"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: name.right
-            width: parent.width*0.23
+            width: parent.width*0.20
             color: applicationData.Theme.FontColor
         }
 
@@ -89,17 +91,27 @@ Item
             text: "Hardware Id"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: serialno.right
-            width: parent.width*0.23
+            width: parent.width*0.20
             color: applicationData.Theme.FontColor
         }
 
         Label
         {
-            id: status
-            text: "Status"
+            id: devicetype
+            text: "Type"
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: hardwareid.right
-            width: parent.width*0.23
+            width: parent.width*0.15
+            color: applicationData.Theme.FontColor
+        }
+
+        Label
+        {
+            id: devicestatus
+            text: "Status"
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: devicetype.right
+            width: parent.width*0.20
             color: applicationData.Theme.FontColor
         }
     }
@@ -154,7 +166,7 @@ Item
                 text: applicationData.DeviceList[index].DeviceName
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: markItem.right
-                width: parent.width*0.23
+                width: parent.width*0.20
                 color: applicationData.Theme.FontColor
             }
 
@@ -164,7 +176,7 @@ Item
                 text: applicationData.DeviceList[index].SerialNo
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: nameItem.right
-                width: parent.width*0.23
+                width: parent.width*0.20
                 color: applicationData.Theme.FontColor
             }
 
@@ -174,7 +186,17 @@ Item
                 text: applicationData.DeviceList[index].HardwareId
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: serialnoItem.right
-                width: parent.width*0.23
+                width: parent.width*0.20
+                color: applicationData.Theme.FontColor
+            }
+
+            Label
+            {
+                id: typeItem
+                text: applicationData.DeviceList[index].Type
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: hardwareidItem.right
+                width: parent.width*0.15
                 color: applicationData.Theme.FontColor
             }
 
@@ -183,8 +205,8 @@ Item
                 id: statusItem
                 text: applicationData.DeviceList[index].Status
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.left: hardwareidItem.right
-                width: parent.width*0.23
+                anchors.left: typeItem.right
+                width: parent.width*0.20
                 color: applicationData.Theme.FontColor
             }
 
@@ -194,7 +216,7 @@ Item
                 height: tableHeader.height*0.75
                 width: tableHeader.height*0.75
                 anchors.verticalCenter: parent.verticalCenter
-                anchors.rightMargin: 10
+                anchors.rightMargin: 5
                 anchors.right: deleteBtnItem.left
 
                 icon.source:
@@ -217,6 +239,11 @@ Item
                 background: Rectangle
                 {
                     color: applicationData.Theme.BackgroundColor
+                }
+
+                onClicked:
+                {
+                    editDevice(index);
                 }
             }
 
@@ -252,6 +279,15 @@ Item
                 }
             }
         }
+    }
+
+    function deleteDevice(index)
+    {
+    }
+
+    function editDevice(index)
+    {
+        editRequested(index);
     }
 
     Connections

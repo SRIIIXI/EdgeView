@@ -56,10 +56,10 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
 
     }
 
-    deviceList_.append(Device("Router", "1111111", "AAAAAA", "Active"));
-    deviceList_.append(Device("Modem", "22222222", "BBBBBB", "Decommisioned"));
-    deviceList_.append(Device("Router", "33333333", "CCCCCC", "InActive"));
-    deviceList_.append(Device("Router", "44444444", "DDDDDD", "In Stock"));
+    deviceList_.append(Device("Router", "1111111", "AAAAAA", "Gateway", "Active"));
+    deviceList_.append(Device("Modem", "22222222", "BBBBBB", "Gateway", "Decommisioned"));
+    deviceList_.append(Device("Sensor", "33333333", "CCCCCC", "Sensor", "InActive"));
+    deviceList_.append(Device("Actuator", "44444444", "DDDDDD", "Actuator", "In Stock"));
 }
 
 void Controller::Initialize()

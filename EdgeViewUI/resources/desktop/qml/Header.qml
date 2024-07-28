@@ -44,7 +44,7 @@ Rectangle
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 20
-        font.pointSize: fontSizeBig
+        font.pointSize: fontSizeLarge
     }
 
     ToolButton

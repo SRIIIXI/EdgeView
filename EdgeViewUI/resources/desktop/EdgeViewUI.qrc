@@ -11,6 +11,7 @@
 
 	<file>qml/Home.qml</file>        
 	<file>qml/Devices.qml</file>
+	<file>qml/DeviceForm.qml</file>
 	<file>qml/Assets.qml</file>
 	<file>qml/Sites.qml</file>
 	<file>qml/Areas.qml</file>
@@ -44,6 +45,7 @@
 	<file>images/ConfigurationBlack.png</file>  
 	<file>images/EditBlack.png</file>  
 	<file>images/DeleteBlack.png</file>  
+	<file>images/CloseBlack.png</file>  
 
 	<file>images/DevicesWhite.png</file>
 	<file>images/SitesWhite.png</file>
@@ -66,6 +68,7 @@
 	<file>images/ConfigurationWhite.png</file>  
 	<file>images/EditWhite.png</file>  
 	<file>images/DeleteWhite.png</file>  
+	<file>images/CloseWhite.png</file>  
 
 	<file>images/GreenDot.png</file>
 	<file>images/Pass.png</file>

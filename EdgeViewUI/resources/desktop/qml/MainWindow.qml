@@ -23,6 +23,7 @@ ApplicationWindow
 
     Component.onCompleted:
     {
+        entityForm.close();
         updateMenu("home")
     }
 
@@ -505,18 +506,6 @@ ApplicationWindow
         anchors.left: userArea.right
         color: applicationData.Theme.BackgroundColor
 
-        CustomButton
-        {
-            buttonWidth: 100
-            buttonHeight: actionBar.height*0.66
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 10
-            accentColor: applicationData.Theme.AccentColor
-            fontColor: applicationData.Theme.FontColor
-            text: "Select All"
-        }
-
         Row
         {
             spacing: 5
@@ -643,6 +632,10 @@ ApplicationWindow
             id: devicesPage
             anchors.fill: parent
             visible: false
+            onEditRequested:
+            {
+                entityForm.open();
+            }
         }
 
         Assets
@@ -766,6 +759,69 @@ ApplicationWindow
                         return "../images/RightBlack.png";
                     }
                 }
+            }
+        }
+    }
+
+    Popup
+    {
+        id: entityForm
+        height: mainView.height
+        width: mainView.width*0.5
+        y: 0
+        x: mainView.width*0.5
+        modal: true
+        focus: true
+        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
+
+        background: Rectangle
+        {
+            color:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "darkgrey";
+                }
+                else
+                {
+                    return "lightgrey";
+                }
+            }
+
+            border.color:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "white";
+                }
+                else
+                {
+                    return "black";
+                }
+            }
+        }
+
+        ToolButton
+        {
+            anchors.top: parent.top
+            anchors.right: parent.right
+            height: headerPanel.height*0.75
+            width: headerPanel.height*0.75
+            icon.source:
+            {
+
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/CloseWhite.png"
+                }
+                else
+                {
+                    return "../images/CloseBlack.png"
+                }
+            }
+            onClicked:
+            {
+                entityForm.close();
             }
         }
     }
