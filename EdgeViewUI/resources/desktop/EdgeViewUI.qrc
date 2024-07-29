@@ -21,6 +21,7 @@
 	<file>qml/Telemetry.qml</file>
 	<file>qml/Alarms.qml</file>
 	<file>qml/Users.qml</file>
+	<file>qml/UserForm.qml</file>
 	<file>qml/Applications.qml</file>
 	<file>qml/Configuration.qml</file>
 

@@ -32,7 +32,7 @@ Item
 
         Rectangle
         {
-            border.color: "lightgrey"//applicationData.Theme.ControlColor
+            border.color: "lightgrey"
             height: 1
             width: parent.width
             anchors.top: tableHeader.top
@@ -40,7 +40,7 @@ Item
 
         Rectangle
         {
-            border.color: "lightgrey"//applicationData.Theme.ControlColor
+            border.color: "lightgrey"
             height: 1
             width: parent.width
             anchors.bottom: tableHeader.bottom

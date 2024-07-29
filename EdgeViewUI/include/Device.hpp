@@ -21,9 +21,9 @@ public:
 public:
     Q_PROPERTY(QString DeviceName MEMBER DeviceName_)
     Q_PROPERTY(QString SerialNo MEMBER SerialNo_)
-    Q_PROPERTY(QString  HardwareId MEMBER HardwareId_)
-    Q_PROPERTY(QString  Type MEMBER Type_)
-    Q_PROPERTY(QString  Status MEMBER Status_)
+    Q_PROPERTY(QString HardwareId MEMBER HardwareId_)
+    Q_PROPERTY(QString Type MEMBER Type_)
+    Q_PROPERTY(QString Status MEMBER Status_)
 
 public:
     Device();

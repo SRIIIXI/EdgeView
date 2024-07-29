@@ -60,6 +60,9 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
     deviceList_.append(Device("Modem", "22222222", "BBBBBB", "Gateway", "Decommisioned"));
     deviceList_.append(Device("Sensor", "33333333", "CCCCCC", "Sensor", "InActive"));
     deviceList_.append(Device("Actuator", "44444444", "DDDDDD", "Actuator", "In Stock"));
+
+    userList_.append(User("ROYS7411", "Subrato", "Roy", "sriiixi@gmail.com", "+91 94328 00528"));
+    userList_.append(User("ROYA0508", "Aditi", "Roy", "aditi.roy.24.08@gmail.com", "+91 89021 76702"));
 }
 
 void Controller::Initialize()
@@ -69,6 +72,8 @@ void Controller::Initialize()
     emit MenuChanged();
     emit DeviceListChanged();
     emit deviceAction();
+    emit UserListChanged();
+    emit userAction();
 }
 
 void Controller::invokeCancel()
@@ -84,4 +89,9 @@ void Controller::invokeExit()
 QList<Device> Controller::getDeviceList()
 {
     return deviceList_;
+}
+
+QList<User> Controller::getUserList()
+{
+    return userList_;
 }

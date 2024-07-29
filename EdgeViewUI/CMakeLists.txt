@@ -47,6 +47,7 @@ ${SOURCE_DIR}/Controller.cpp
 ${SOURCE_DIR}/ControllerComm.cpp
 ${SOURCE_DIR}/ControllerAppMgmt.cpp
 ${SOURCE_DIR}/Device.cpp
+${SOURCE_DIR}/User.cpp
 )
 
 set(HEADERS
@@ -56,6 +57,7 @@ ${HEADER_DIR}/ApplicationTheme.hpp
 ${HEADER_DIR}/ApplicationMenu.hpp
 ${HEADER_DIR}/Controller.hpp
 ${HEADER_DIR}/Device.hpp
+${HEADER_DIR}/User.hpp
 )
 
 if(IOS)

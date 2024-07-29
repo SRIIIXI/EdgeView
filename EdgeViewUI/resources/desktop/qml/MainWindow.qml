@@ -664,6 +664,10 @@ ApplicationWindow
             id: usersPage
             anchors.fill: parent
             visible: false
+            onEditRequested:
+            {
+                entityForm.open();
+            }
         }
 
         Applications

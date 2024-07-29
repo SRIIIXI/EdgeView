@@ -13,6 +13,7 @@
 #include <QIcon>
 
 #include "Device.hpp"
+#include "User.hpp"
 
 #include "ApplicationTheme.hpp"
 #include "ApplicationMenu.hpp"
@@ -46,6 +47,9 @@ public:
     Q_PROPERTY(QList<Device> DeviceList READ getDeviceList NOTIFY DeviceListChanged);
     QList<Device> getDeviceList();
 
+    Q_PROPERTY(QList<User> UserList READ getUserList NOTIFY UserListChanged);
+    QList<User> getUserList();
+
     void Initialize();
 
 signals:
@@ -60,6 +64,9 @@ signals:
     //Domain objects
     void DeviceListChanged();
     void deviceAction();
+
+    void UserListChanged();
+    void userAction();
 
     //Specifc errors
 
@@ -86,6 +93,7 @@ private:
 
     //Domain object lists
     QList<Device> deviceList_;
+    QList<User> userList_;
 };
 
 extern Controller* controllerInstance;
