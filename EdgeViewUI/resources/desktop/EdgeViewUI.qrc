@@ -1,7 +1,9 @@
 <RCC>
     <qresource prefix="/">
+	<file>fonts/TrenchThin-16R0.otf</file>
 	<file>qml/Header.qml</file>
 	<file>qml/MainWindow.qml</file>
+	<file>qml/About.qml</file>
 
 	<file>qml/CustomButton.qml</file>
 	<file>qml/CustomRoundButton.qml</file>
@@ -47,6 +49,7 @@
 	<file>images/EditBlack.png</file>  
 	<file>images/DeleteBlack.png</file>  
 	<file>images/CloseBlack.png</file>  
+	<file>images/AboutBlack.png</file>  
 
 	<file>images/DevicesWhite.png</file>
 	<file>images/SitesWhite.png</file>
@@ -70,6 +73,7 @@
 	<file>images/EditWhite.png</file>  
 	<file>images/DeleteWhite.png</file>  
 	<file>images/CloseWhite.png</file>  
+	<file>images/AboutWhite.png</file>  
 
 	<file>images/GreenDot.png</file>
 	<file>images/Pass.png</file>

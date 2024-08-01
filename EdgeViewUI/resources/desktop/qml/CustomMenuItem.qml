@@ -87,17 +87,7 @@ Rectangle
                 color: textColor
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
-                font.bold:
-                {
-                    if(isActive === true)
-                    {
-                        return true
-                    }
-                    else
-                    {
-                        return false
-                    }
-                }
+                font.bold: false
             }
         }
     }

@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
+import QtQuick.Effects
 
 ApplicationWindow
 {
@@ -39,7 +40,7 @@ ApplicationWindow
         width:  200
         anchors.top: parent.top
         anchors.left: parent.left
-        color: applicationData.Theme.ControlColor
+        color: applicationData.Theme.NavigationBarColor
 
         Rectangle
         {
@@ -47,19 +48,44 @@ ApplicationWindow
             width: parent.height*0.5
             height: parent.height*0.5
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.top: userArea.top
+            anchors.topMargin: 10
             radius: height*0.5
-            border.width: 1
-            border.color: "grey"
 
             Image
             {
-                id: name
-                anchors.centerIn: parent
-                height: userImageRect.height*0.66
-                width: userImageRect.height*0.66
+                id: userImage
                 source: "../images/SampleUser.png"
-                fillMode: Image.PreserveAspectCrop
+                anchors.top: userImageRect.top
+                anchors.centerIn: parent
+                width: parent.height
+                height: parent.height
+                visible: false
+            }
+
+            MultiEffect
+            {
+                source: userImage
+                anchors.fill: userImage
+                maskEnabled: true
+                maskSource: mask
+            }
+
+            Item
+            {
+                id: mask
+                width: userImage.width
+                height: userImage.height
+                layer.enabled: true
+                visible: false
+
+                Rectangle
+                {
+                    width: userImage.width
+                    height: userImage.height
+                    radius: width/2
+                    color: applicationData.Theme.NavigationBarColor
+                }
             }
         }
 
@@ -67,7 +93,8 @@ ApplicationWindow
         {
             text: "Logged User"
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.top: parent.bottom
+            anchors.top: userImageRect.bottom
+            anchors.topMargin: 5
             color: applicationData.Theme.FontColor
         }
     }
@@ -77,7 +104,7 @@ ApplicationWindow
         id: menuArea
         width: 200
         height: parent.height - userArea.height
-        color: applicationData.Theme.ControlColor
+        color: applicationData.Theme.NavigationBarColor
         anchors.left: parent.left
         anchors.top: userArea.bottom
 
@@ -101,7 +128,7 @@ ApplicationWindow
                     return "../images/HomeBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -130,7 +157,7 @@ ApplicationWindow
                     return "../images/EnterprisesBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -159,7 +186,7 @@ ApplicationWindow
                     return "../images/SitesBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -188,7 +215,7 @@ ApplicationWindow
                     return "../images/AreasBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -217,7 +244,7 @@ ApplicationWindow
                     return "../images/DevicesBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -246,7 +273,7 @@ ApplicationWindow
                     return "../images/AssetsBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -275,7 +302,7 @@ ApplicationWindow
                     return "../images/RulesBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -304,7 +331,7 @@ ApplicationWindow
                     return "../images/RolesBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -333,7 +360,7 @@ ApplicationWindow
                     return "../images/UsersBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -362,7 +389,7 @@ ApplicationWindow
                     return "../images/ApplicationsBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -391,7 +418,7 @@ ApplicationWindow
                     return "../images/TelemetryBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -420,7 +447,7 @@ ApplicationWindow
                     return "../images/AlarmsBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -449,7 +476,7 @@ ApplicationWindow
                     return "../images/ConfigurationBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -460,10 +487,39 @@ ApplicationWindow
 
         CustomMenuItem
         {
-            id: menuExit
+            id: menuAbout
             menuWidth: 200
             menuHeight: applicationData.Theme.BarHeight
             anchors.top: menuConfiguration.bottom
+            anchors.left: parent.left
+            text: "About"
+            isActive: false
+            menuIconSource:
+            {
+                if(applicationData.IsDarkTheme === true)
+                {
+                    return "../images/AboutWhite.png";
+                }
+                else
+                {
+                    return "../images/AboutBlack.png";
+                }
+            }
+            normalColor: applicationData.Theme.NavigationBarColor
+            textColor: applicationData.Theme.FontColor
+            onClicked:
+            {
+                updateMenu("about")
+                applicationData.invokeSaveCurrentPage("About.qml")
+            }
+        }
+
+        CustomMenuItem
+        {
+            id: menuExit
+            menuWidth: 200
+            menuHeight: applicationData.Theme.BarHeight
+            anchors.top: menuAbout.bottom
             anchors.left: parent.left
             text: "Exit"
             isActive: false
@@ -478,7 +534,7 @@ ApplicationWindow
                     return "../images/ExitBlack.png";
                 }
             }
-            normalColor: applicationData.Theme.ControlColor
+            normalColor: applicationData.Theme.NavigationBarColor
             textColor: applicationData.Theme.FontColor
             onClicked:
             {
@@ -524,7 +580,7 @@ ApplicationWindow
                     buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    accentColor: applicationData.Theme.AccentColor
+                    accentColor: applicationData.Theme.BackgroundColor
                     imageSource:
                     {
                         if(applicationData.IsDarkTheme === true)
@@ -549,7 +605,7 @@ ApplicationWindow
                     buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    accentColor: applicationData.Theme.AccentColor
+                    accentColor: applicationData.Theme.BackgroundColor
                     imageSource:
                     {
                         if(applicationData.IsDarkTheme === true)
@@ -574,7 +630,7 @@ ApplicationWindow
                     buttonSize: actionBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    accentColor: applicationData.Theme.AccentColor
+                    accentColor: applicationData.Theme.BackgroundColor
                     imageSource:
                     {
                         if(applicationData.IsDarkTheme === true)
@@ -697,6 +753,13 @@ ApplicationWindow
             anchors.fill: parent
             visible: false
         }
+
+        About
+        {
+            id: aboutPage
+            anchors.fill: parent
+            visible: false
+        }
     }
 
     Rectangle
@@ -726,7 +789,7 @@ ApplicationWindow
                     buttonSize: navigationBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    accentColor: applicationData.Theme.AccentColor
+                    accentColor: applicationData.Theme.BackgroundColor
                     imageSource:
                     {
                         if(applicationData.IsDarkTheme === true)
@@ -752,7 +815,7 @@ ApplicationWindow
                     buttonSize: navigationBar.height*0.66
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
-                    accentColor: applicationData.Theme.AccentColor
+                    accentColor: applicationData.Theme.BackgroundColor
                     imageSource:
                     if(applicationData.IsDarkTheme === true)
                     {
@@ -845,6 +908,7 @@ ApplicationWindow
         menuUsers.isActive = false;
         menuApplications.isActive = false;
         menuConfiguration.isActive = false;
+        menuAbout.isActive = false;
 
         homePage.visible = false;
         enterprisesPage.visible = false;
@@ -859,6 +923,7 @@ ApplicationWindow
         telemetryPage.visible = false;
         alarmsPage.visible = false;
         configurationPage.visible = false;
+        aboutPage.visible = false;
 
         switch(menuname)
         {
@@ -938,6 +1003,12 @@ ApplicationWindow
         {
             menuConfiguration.isActive = true;
             configurationPage.visible = true;
+            break;
+        }
+        case "about":
+        {
+            menuAbout.isActive = true;
+            aboutPage.visible = true;
             break;
         }
         }

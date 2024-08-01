@@ -28,11 +28,11 @@ Item
         id: tableHeader
         height: applicationData.Theme.BarHeight*0.75
         width: parent.width
-        color: applicationData.Theme.BackgroundColor
+        color: applicationData.Theme.ControlColor
 
         Rectangle
         {
-            border.color: "lightgrey"
+            border.color: "darkgrey"
             height: 1
             width: parent.width
             anchors.top: tableHeader.top
@@ -40,7 +40,7 @@ Item
 
         Rectangle
         {
-            border.color: "lightgrey"
+            border.color: "darkgrey"
             height: 1
             width: parent.width
             anchors.bottom: tableHeader.bottom
@@ -139,7 +139,7 @@ Item
             width: deviceListView.width
             height: tableHeader.height
             radius: 0
-            color: applicationData.Theme.BackgroundColor
+            color: applicationData.Theme.ControlLowColor
 
             CheckBox
             {
@@ -238,7 +238,7 @@ Item
 
                 background: Rectangle
                 {
-                    color: applicationData.Theme.BackgroundColor
+                    color: applicationData.Theme.ControlLowColor
                 }
 
                 onClicked:
@@ -275,7 +275,7 @@ Item
 
                 background: Rectangle
                 {
-                    color: applicationData.Theme.BackgroundColor
+                    color: applicationData.Theme.ControlLowColor
                 }
             }
         }

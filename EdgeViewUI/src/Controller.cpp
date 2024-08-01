@@ -19,8 +19,8 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
         theme_.EnableDarkMode();
     }
 
-    isDarkTheme_ = false;
-    theme_.EnableLightMode();
+    //isDarkTheme_ = false;
+    //theme_.EnableLightMode();
 
     QImage appImg("../images/EdgeView.png");
     QIcon icn(QPixmap::fromImage(appImg));

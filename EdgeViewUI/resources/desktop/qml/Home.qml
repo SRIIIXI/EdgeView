@@ -14,32 +14,12 @@ Item
         color: applicationData.Theme.BackgroundColor
     }
 
-    ScrollView
+    Label
     {
-        anchors.fill: parent
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
-        Material.accent: applicationData.Theme.AccentColor
-        Material.theme:
-        {
-            if(applicationData.IsDarkTheme === true)
-            {
-                return Material.Dark;
-            }
-            else
-            {
-                return Material.Light;
-            }
-        }
-
-        Label
-        {
-           id: dummy
-           text: "Home"
-           anchors.horizontalCenter: parent.horizontalCenter
-           anchors.verticalCenter: parent.verticalCenter
-           color: applicationData.Theme.FontColor
-        }
+       id: dummy
+       text: "Home"
+       anchors.horizontalCenter: parent.horizontalCenter
+       anchors.verticalCenter: parent.verticalCenter
+       color: applicationData.Theme.FontColor
     }
 }
