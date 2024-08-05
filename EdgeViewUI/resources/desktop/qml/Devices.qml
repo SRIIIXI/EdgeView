@@ -131,7 +131,7 @@ Item
 
     Component
     {
-        id: deviceListDelegate
+        id: deviceListDelegate   
 
         Rectangle
         {
@@ -140,6 +140,8 @@ Item
             height: tableHeader.height
             radius: 0
             color: applicationData.Theme.ControlLowColor
+
+
 
             CheckBox
             {
