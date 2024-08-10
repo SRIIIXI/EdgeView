@@ -63,6 +63,9 @@ Controller::Controller(QGuiApplication *appPtr, QObject *parent)
 
     userList_.append(User("ROYS7411", "Subrato", "Roy", "sriiixi@gmail.com", "+91 94328 00528"));
     userList_.append(User("ROYA0508", "Aditi", "Roy", "aditi.roy.24.08@gmail.com", "+91 89021 76702"));
+
+    enterpriseList_.append(Enterprise("ENTERPRISE01", "Subrato", "Roy", "sriiixi@gmail.com", "+91 94328 00528"));
+    enterpriseList_.append(Enterprise("ENTERPRISE01", "Aditi", "Roy", "aditi.roy.24.08@gmail.com", "+91 89021 76702"));
 }
 
 void Controller::Initialize()
@@ -74,6 +77,8 @@ void Controller::Initialize()
     emit deviceAction();
     emit UserListChanged();
     emit userAction();
+    emit EnterpriseListChanged();
+    emit enterpriseAction();
 }
 
 void Controller::invokeCancel()
@@ -94,4 +99,9 @@ QList<Device> Controller::getDeviceList()
 QList<User> Controller::getUserList()
 {
     return userList_;
+}
+
+QList<Enterprise> Controller::getEnterpriseList()
+{
+    return enterpriseList_;
 }

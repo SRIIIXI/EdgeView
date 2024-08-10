@@ -12,8 +12,19 @@
 #include <QPalette>
 #include <QIcon>
 
+#include "Enterprise.hpp"
+#include "Site.hpp"
+#include "Area.hpp"
 #include "Device.hpp"
+#include "Asset.hpp"
+#include "Rule.hpp"
+#include "Role.hpp"
 #include "User.hpp"
+#include "Application.hpp"
+#include "Telemetry.hpp"
+#include "Alarm.hpp"
+#include "Configuration.hpp"
+#include "About.hpp"
 
 #include "ApplicationTheme.hpp"
 #include "ApplicationMenu.hpp"
@@ -50,6 +61,9 @@ public:
     Q_PROPERTY(QList<User> UserList READ getUserList NOTIFY UserListChanged);
     QList<User> getUserList();
 
+    Q_PROPERTY(QList<Enterprise> EnterpriseList READ getEnterpriseList NOTIFY EnterpriseListChanged);
+    QList<Enterprise> getEnterpriseList();
+
     void Initialize();
 
 signals:
@@ -67,6 +81,9 @@ signals:
 
     void UserListChanged();
     void userAction();
+
+    void EnterpriseListChanged();
+    void enterpriseAction();
 
     //Specifc errors
 
@@ -94,6 +111,7 @@ private:
     //Domain object lists
     QList<Device> deviceList_;
     QList<User> userList_;
+    QList<Enterprise> enterpriseList_;
 };
 
 extern Controller* controllerInstance;

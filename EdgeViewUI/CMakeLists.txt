@@ -46,8 +46,19 @@ ${SOURCE_DIR}/EdgeView.cpp
 ${SOURCE_DIR}/Controller.cpp
 ${SOURCE_DIR}/ControllerComm.cpp
 ${SOURCE_DIR}/ControllerAppMgmt.cpp
+${SOURCE_DIR}/Enterprise.cpp
+${SOURCE_DIR}/Site.cpp
+${SOURCE_DIR}/Area.cpp
 ${SOURCE_DIR}/Device.cpp
+${SOURCE_DIR}/Asset.cpp
+${SOURCE_DIR}/Rule.cpp
+${SOURCE_DIR}/Role.cpp
 ${SOURCE_DIR}/User.cpp
+${SOURCE_DIR}/Application.cpp
+${SOURCE_DIR}/Telemetry.cpp
+${SOURCE_DIR}/Alarm.cpp
+${SOURCE_DIR}/Configuration.cpp
+${SOURCE_DIR}/About.cpp
 )
 
 set(HEADERS
@@ -56,8 +67,19 @@ ${HEADER_DIR}/EdgeView.hpp
 ${HEADER_DIR}/ApplicationTheme.hpp
 ${HEADER_DIR}/ApplicationMenu.hpp
 ${HEADER_DIR}/Controller.hpp
+${HEADER_DIR}/Enterprise.hpp
+${HEADER_DIR}/Site.hpp
+${HEADER_DIR}/Area.hpp
 ${HEADER_DIR}/Device.hpp
+${HEADER_DIR}/Asset.hpp
+${HEADER_DIR}/Rule.hpp
+${HEADER_DIR}/Role.hpp
 ${HEADER_DIR}/User.hpp
+${HEADER_DIR}/Application.hpp
+${HEADER_DIR}/Telemetry.hpp
+${HEADER_DIR}/Alarm.hpp
+${HEADER_DIR}/Configuration.hpp
+${HEADER_DIR}/About.hpp
 )
 
 if(IOS)

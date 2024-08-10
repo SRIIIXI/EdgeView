@@ -5,13 +5,13 @@ User::User()
 
 }
 
-User::User(QString iUserId, QString iFirstName, QString iLastName, QString iEmailId, QString iContactNo)
+User::User(QString iUserId, QString iFirstName, QString iLastName, QString iEmailId, QString iPhoneNo)
 {
     UserId_ = iUserId;
     FirstName_ = iFirstName;
     LastName_ = iLastName;
     EmailId_ = iEmailId;
-    ContactNo_ = iContactNo;
+    PhoneNo_ = iPhoneNo;
 }
 
 User::User(const User& other)
@@ -20,7 +20,7 @@ User::User(const User& other)
     FirstName_ = other.FirstName_;
     LastName_ = other.LastName_;
     EmailId_ = other.EmailId_;
-    ContactNo_ = other.ContactNo_;
+    PhoneNo_ = other.PhoneNo_;
 }
 
 User& User::operator = (const User& other)
@@ -29,7 +29,7 @@ User& User::operator = (const User& other)
     FirstName_ = other.FirstName_;
     LastName_ = other.LastName_;
     EmailId_ = other.EmailId_;
-    ContactNo_ = other.ContactNo_;
+    PhoneNo_ = other.PhoneNo_;
     return *this;
 }
 

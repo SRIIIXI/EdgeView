@@ -2,7 +2,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls.Material 2.3
 import QtQuick.Layouts 1.3
-import Qt.labs.qmlmodels
 
 Item
 {
@@ -108,7 +107,7 @@ Item
         Label
         {
             id: contactno
-            text: "Contact No."
+            text: "Phone No."
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: emailid.right
             width: parent.width*0.20
@@ -202,8 +201,8 @@ Item
 
             Label
             {
-                id: contactnoItem
-                text: applicationData.UserList[index].ContactNo
+                id: phonenoItem
+                text: applicationData.UserList[index].PhoneNo
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: emailidItem.right
                 width: parent.width*0.20
