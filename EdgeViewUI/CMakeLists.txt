@@ -54,7 +54,7 @@ ${SOURCE_DIR}/Asset.cpp
 ${SOURCE_DIR}/Rule.cpp
 ${SOURCE_DIR}/Role.cpp
 ${SOURCE_DIR}/User.cpp
-${SOURCE_DIR}/Application.cpp
+${SOURCE_DIR}/EdgeApplication.cpp
 ${SOURCE_DIR}/Telemetry.cpp
 ${SOURCE_DIR}/Alarm.cpp
 ${SOURCE_DIR}/Configuration.cpp
@@ -75,7 +75,7 @@ ${HEADER_DIR}/Asset.hpp
 ${HEADER_DIR}/Rule.hpp
 ${HEADER_DIR}/Role.hpp
 ${HEADER_DIR}/User.hpp
-${HEADER_DIR}/Application.hpp
+${HEADER_DIR}/EdgeApplication.hpp
 ${HEADER_DIR}/Telemetry.hpp
 ${HEADER_DIR}/Alarm.hpp
 ${HEADER_DIR}/Configuration.hpp

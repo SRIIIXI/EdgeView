@@ -1,11 +1,11 @@
-#include "Application.hpp"
+#include "EdgeApplication.hpp"
 
-Application::Application()
+EdgeApplication::EdgeApplication()
 {
 
 }
 
-Application::Application(QString iDeviceName, QString iSerialNo, QString iHardwareId, QString iType, QString iStatus)
+EdgeApplication::EdgeApplication(QString iDeviceName, QString iSerialNo, QString iHardwareId, QString iType, QString iStatus)
 {
     DeviceName_ = iDeviceName;
     SerialNo_ = iSerialNo;
@@ -14,7 +14,7 @@ Application::Application(QString iDeviceName, QString iSerialNo, QString iHardwa
     Status_ = iStatus;
 }
 
-Application::Application(const Application& other)
+EdgeApplication::EdgeApplication(const EdgeApplication& other)
 {
     DeviceName_ = other.DeviceName_;
     SerialNo_ = other.SerialNo_;
@@ -23,7 +23,7 @@ Application::Application(const Application& other)
     Status_ = other.Status_;
 }
 
-Application& Application::operator = (const Application& other)
+EdgeApplication& EdgeApplication::operator = (const EdgeApplication& other)
 {
     DeviceName_ = other.DeviceName_;
     SerialNo_ = other.SerialNo_;
@@ -33,7 +33,7 @@ Application& Application::operator = (const Application& other)
     return *this;
 }
 
-Application::~Application()
+EdgeApplication::~EdgeApplication()
 {
 
 }

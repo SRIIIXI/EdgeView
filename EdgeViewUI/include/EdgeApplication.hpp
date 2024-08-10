@@ -1,9 +1,9 @@
-#ifndef APPLICATION_
-#define ASSET_
+#ifndef EDGE_APPLICATION_
+#define EDGE_APPLICATION_
 
 #include <QtCore>
 
-class Application
+class EdgeApplication
 {
 public:
     Q_GADGET
@@ -26,11 +26,11 @@ public:
     Q_PROPERTY(QString Status MEMBER Status_)
 
 public:
-    Application();
-    Application(QString iDeviceName, QString iSerialNo, QString  iHardwareId, QString  iType, QString  iStatus);
-    Application(const Application& other);
-    Application& operator = (const Application& other);
-    ~Application();
+    EdgeApplication();
+    EdgeApplication(QString iDeviceName, QString iSerialNo, QString  iHardwareId, QString  iType, QString  iStatus);
+    EdgeApplication(const EdgeApplication& other);
+    EdgeApplication& operator = (const EdgeApplication& other);
+    ~EdgeApplication();
 };
 
 

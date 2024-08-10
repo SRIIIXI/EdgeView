@@ -91,9 +91,39 @@ void Controller::invokeExit()
     exit(0);
 }
 
+QList<Enterprise> Controller::getEnterpriseList()
+{
+    return enterpriseList_;
+}
+
+QList<Site> Controller::getSiteList()
+{
+    return siteList_;
+}
+
+QList<Area> Controller::getAreaList()
+{
+    return areaList_;
+}
+
 QList<Device> Controller::getDeviceList()
 {
     return deviceList_;
+}
+
+QList<Asset> Controller::getAssetList()
+{
+    return assetList_;
+}
+
+QList<Rule> Controller::getRuleList()
+{
+    return ruleList_;
+}
+
+QList<Role> Controller::getRoleList()
+{
+    return roleList_;
 }
 
 QList<User> Controller::getUserList()
@@ -101,7 +131,27 @@ QList<User> Controller::getUserList()
     return userList_;
 }
 
-QList<Enterprise> Controller::getEnterpriseList()
+QList<EdgeApplication> Controller::getEdgeApplicationList()
 {
-    return enterpriseList_;
+    return edgeApplicationList_;
+}
+
+QList<Telemetry> Controller::getTelemetryList()
+{
+    return telemetryList_;
+}
+
+QList<Alarm> Controller::getAlarmList()
+{
+    return alarmList_;
+}
+
+Configuration Controller::getApplicationConfiguration()
+{
+    return applicationConfiguration_;
+}
+
+About Controller::getApplicationAbout()
+{
+    return applicationAbout_;
 }
