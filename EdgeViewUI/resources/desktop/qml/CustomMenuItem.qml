@@ -20,21 +20,11 @@ Rectangle
     radius:   0
     opacity:  enabled  &&  !mouseArea.pressed? 1: 0.3
 
-    color:
-    {
-        if(isActive === true)
-        {
-            return activeColor
-        }
-        else
-        {
-            return normalColor
-        }
-    }
+    color: normalColor
 
     Row
     {
-        width: menuWidth*0.8
+        width: menuWidth
         height: menuHeight
         anchors.verticalCenter: parent.verticalCenter
         anchors.horizontalCenter: parent.horizontalCenter
@@ -42,8 +32,9 @@ Rectangle
 
         Rectangle
         {
+            id: indicator
             height: menuHeight
-            width: menuHeight
+            width: menuHeight*0.2
             color:
             {
                 if(isActive === true)
@@ -55,6 +46,13 @@ Rectangle
                     return normalColor
                 }
             }
+        }
+
+        Rectangle
+        {
+            height: menuHeight
+            width: menuHeight
+            color: normalColor
             Image
             {
                 source: menuIconSource
@@ -69,22 +67,24 @@ Rectangle
         {
             height: menuHeight
             width: menuWidth*0.8 - menuHeight
-            color:
-            {
-                if(isActive === true)
-                {
-                    return activeColor
-                }
-                else
-                {
-                    return normalColor
-                }
-            }
+            color: normalColor
+
             Text
             {
                 text: root.text
                 elide: textAlignment
-                color: textColor
+                color:
+                {
+                    if(isActive === true)
+                    {
+                        return activeColor
+                    }
+                    else
+                    {
+                        return textColor
+                    }
+                }
+
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 font.bold: false
