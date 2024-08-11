@@ -91,6 +91,9 @@
 	<file>images/Fail.png</file>
 	<file>images/Done.png</file>
 	<file>images/Bandwidth.png</file>
+	<file>images/Fault.png</file>
+	<file>images/Battery.png</file>
+	<file>images/Active.png</file>
 	
 	<file>images/EdgeView.png</file>
 	<file>images/SampleUser.png</file>

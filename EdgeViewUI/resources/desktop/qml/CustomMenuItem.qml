@@ -60,6 +60,7 @@ Rectangle
                 height: menuHeight*0.5
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
+                antialiasing: true
             }
         }
 

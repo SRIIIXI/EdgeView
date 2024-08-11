@@ -4,27 +4,24 @@ Item
 {
     id: root
 
- // public
     property string title:  'title'
     property string yLabel: 'yLabel'
     property string xLabel: 'xLabel'
 
-    property variant points: []//{x: 'Zero', y: 60, color: 'red'}, {x: 'One', y: 40, color: 'blue' }]
+    property variant points: []
     property string color1 : "#961C1C"
     property string color2 : "#008080"
 
- // private
     property double factor: Math.min(width, height)
 
     property double yInterval:  1
-    property double yMaximum:  10 // set by onPointsChanged
+    property double yMaximum:  10
     property double yMinimum:   0
-    function toYPixels(y){return plot.height / (yMaximum - yMinimum) * (y - yMinimum)}
-
-    property int    xMaximum:   0 // string length
+    function toYPixels(y) { return plot.height / (yMaximum - yMinimum) * (y - yMinimum) }
+    property int    xMaximum:   0
 
     onPointsChanged:
-    { // auto scale vertically
+    {
         if(!points)  return
         var xMaximum = 0, yMinimum = 0, yMaximum = 0
 
@@ -50,8 +47,13 @@ Item
         root.xMaximum  = xMaximum
     }
 
-    width: 500;
-    height: 500 // default size
+    width: 500
+    height: 500
+
+    FontSizer
+    {
+        id: fontsizer
+    }
 
     Text
     {
@@ -64,17 +66,41 @@ Item
     Text
     {
         text: yLabel
-        font.pixelSize: 0.03 * factor
+        font.pixelSize: fontsizer.fontSizeSmall
         y: 0.5 * (2 * plot.y + plot.height + width)
         rotation: -90
         transformOrigin: Item.TopLeft
         color: applicationData.Theme.FontColor
     }
 
+    /*
+    Text
+    { // x label
+        text: xLabel
+        font.pixelSize: 0.03 * factor
+        anchors
+        {
+            topMargin: 50
+            bottom: parent.bottom;
+            horizontalCenter: plot.horizontalCenter
+        }
+        color:
+        {
+            if(applicationData.IsDarkTheme === true)
+            {
+                return "white";
+            }
+            else
+            {
+                return "black";
+            }
+        }
+    }
+    */
+
     Item
     {
         id: plot
-
         Rectangle
         {
             anchors.fill: parent
@@ -129,8 +155,8 @@ Item
         }
 
         Repeater
-        { // y axis tick marks and labels
-            model: Math.floor((yMaximum - yMinimum) / yInterval) + 1 // number of tick marks
+        {
+            model: Math.floor((yMaximum - yMinimum) / yInterval) + 1
 
             delegate: Rectangle
             {
@@ -149,24 +175,24 @@ Item
                         verticalCenter: parent.verticalCenter;
                         margins: 0.01 * factor
                     }
-                    font.pixelSize: 0.03 * factor
+                    font.pixelSize: fontsizer.fontSizeSmall
                     color: applicationData.Theme.FontColor
                 }
             }
         }
 
         Repeater
-        { // data
+        {
             model: points
 
             delegate: Item
-            { // column
+            {
                 width: plot.width / points.length;
                 height: plot.height
                 x: width * index
 
                 Rectangle
-                { // bar
+                {
                     id: bar1
                     anchors.leftMargin: 5
                     anchors
@@ -183,7 +209,7 @@ Item
                 }
 
                 Rectangle
-                { // bar
+                {
                     id: bar2
                     anchors
                     {
@@ -200,13 +226,12 @@ Item
 
                 Text
                 {
-                    // x values (rotated -90 degrees)
                     text: modelData.x
                     x:   (parent.width - height) / 2
                     y:    parent.height + width + 0.5 * height
                     rotation: -90
                     transformOrigin: Item.TopLeft
-                    font.pixelSize: 0.03 * factor
+                    font.pixelSize: fontsizer.fontSizeSmall
                     color: applicationData.Theme.FontColor
                 }
             }

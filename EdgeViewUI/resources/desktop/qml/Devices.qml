@@ -16,10 +16,23 @@ Item
         deviceModel = applicationData.DeviceList
     }
 
+    FontSizer
+    {
+        id: fontsizer
+    }
+
     Rectangle
     {
         color: applicationData.Theme.BackgroundColor
         anchors.fill: parent
+    }
+
+    ActionBar
+    {
+        id: actionbar
+        width: parent.width
+        height: applicationData.Theme.BarHeight
+        anchors.top: parent.top
     }
 
     Rectangle
@@ -27,6 +40,7 @@ Item
         id: tableHeader
         height: applicationData.Theme.BarHeight*0.75
         width: parent.width
+        anchors.top: actionbar.bottom
         color: applicationData.Theme.ControlColor
 
         Rectangle
@@ -118,7 +132,7 @@ Item
     ListView
     {
         id: deviceListView
-        height: parent.height - tableHeader.height
+        height: parent.height - tableHeader.height - actionbar.height - navigationbar.height
         width: parent.width
         anchors.top: tableHeader.bottom
         visible: true
@@ -169,6 +183,7 @@ Item
                 anchors.left: markItem.right
                 width: parent.width*0.20
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -179,6 +194,7 @@ Item
                 anchors.left: nameItem.right
                 width: parent.width*0.20
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -189,6 +205,7 @@ Item
                 anchors.left: serialnoItem.right
                 width: parent.width*0.20
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -199,6 +216,7 @@ Item
                 anchors.left: hardwareidItem.right
                 width: parent.width*0.15
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -209,6 +227,7 @@ Item
                 anchors.left: typeItem.right
                 width: parent.width*0.20
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             ToolButton
@@ -280,6 +299,14 @@ Item
                 }
             }
         }
+    }
+
+    NavigationBar
+    {
+        id: navigationbar
+        width: parent.width
+        height: applicationData.Theme.BarHeight
+        anchors.bottom: parent.bottom
     }
 
     function deleteDevice(index)

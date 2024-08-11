@@ -41,6 +41,7 @@ ApplicationWindow
         anchors.top: parent.top
         anchors.left: parent.left
         color: applicationData.Theme.NavigationBarColor
+        antialiasing: true
 
         Rectangle
         {
@@ -51,6 +52,7 @@ ApplicationWindow
             anchors.top: userArea.top
             anchors.topMargin: 10
             radius: height*0.5
+            antialiasing: true
 
             Image
             {
@@ -61,6 +63,7 @@ ApplicationWindow
                 width: parent.height
                 height: parent.height
                 visible: false
+                antialiasing: true
             }
 
             MultiEffect
@@ -69,6 +72,7 @@ ApplicationWindow
                 anchors.fill: userImage
                 maskEnabled: true
                 maskSource: mask
+                antialiasing: true
             }
 
             Item
@@ -78,6 +82,7 @@ ApplicationWindow
                 height: userImage.height
                 layer.enabled: true
                 visible: false
+                antialiasing: true
 
                 Rectangle
                 {
@@ -85,6 +90,7 @@ ApplicationWindow
                     height: userImage.height
                     radius: width/2
                     color: applicationData.Theme.NavigationBarColor
+                    antialiasing: true
                 }
             }
         }

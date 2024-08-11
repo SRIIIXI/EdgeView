@@ -31,22 +31,15 @@ Rectangle
         font.pointSize: fontsizer.fontSizeLarge
     }
 
-    ToolButton
+    Image
     {
         id: backBtnID
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
-        height: parent.height
-        width: parent.height
+        height: parent.height*0.9
         visible: true
-        icon.source :"../images/EdgeView.png"
-        icon.color: "transparent"
-        icon.height: parent.height*0.5
-        icon.width: parent.height*0.5
-
-        background: Rectangle
-        {
-            color: applicationData.Theme.BackgroundColor
-        }
+        source :"../images/EdgeView.png"
+        fillMode: Image.PreserveAspectFit
+        antialiasing: true
     }
 }

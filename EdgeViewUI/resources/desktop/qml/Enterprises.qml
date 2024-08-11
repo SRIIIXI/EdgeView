@@ -11,6 +11,11 @@ Item
 
     signal editRequested(int mode);
 
+    FontSizer
+    {
+        id: fontsizer
+    }
+
     Component.onCompleted:
     {
         enterpriseModel = applicationData.EnterpriseList
@@ -22,11 +27,20 @@ Item
         anchors.fill: parent
     }
 
+    ActionBar
+    {
+        id: actionbar
+        width: parent.width
+        height: applicationData.Theme.BarHeight
+        anchors.top: parent.top
+    }
+
     Rectangle
     {
         id: tableHeader
         height: applicationData.Theme.BarHeight*0.75
         width: parent.width
+        anchors.top: actionbar.bottom
         color: applicationData.Theme.ControlColor
 
         Rectangle
@@ -118,7 +132,7 @@ Item
     ListView
     {
         id: enterpriseListView
-        height: parent.height - tableHeader.height
+        height: parent.height - tableHeader.height - actionbar.height - navigationbar.height
         width: parent.width
         anchors.top: tableHeader.bottom
         visible: true
@@ -167,6 +181,7 @@ Item
                 anchors.left: markItem.right
                 width: parent.width*0.15
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -177,6 +192,7 @@ Item
                 anchors.left: enterpriseidItem.right
                 width: parent.width*0.18
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -187,6 +203,7 @@ Item
                 anchors.left: firstnameItem.right
                 width: parent.width*0.17
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -197,6 +214,7 @@ Item
                 anchors.left: lastnameItem.right
                 width: parent.width*0.25
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             Label
@@ -207,6 +225,7 @@ Item
                 anchors.left: emailidItem.right
                 width: parent.width*0.20
                 color: applicationData.Theme.FontColor
+                font.pixelSize: fontsizer.fontSizeSmall
             }
 
             ToolButton
@@ -220,7 +239,6 @@ Item
 
                 icon.source:
                 {
-
                     if(applicationData.IsDarkTheme === true)
                     {
                         return "../images/EditWhite.png"
@@ -278,6 +296,14 @@ Item
                 }
             }
         }
+    }
+
+    NavigationBar
+    {
+        id: navigationbar
+        width: parent.width
+        height: applicationData.Theme.BarHeight
+        anchors.bottom: parent.bottom
     }
 
     function deleteEnterprise(index)

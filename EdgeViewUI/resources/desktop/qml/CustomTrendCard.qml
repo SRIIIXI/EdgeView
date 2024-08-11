@@ -11,6 +11,12 @@ Item
     property string trendName: "ABC"
     property string trendValue: "55.5"
     property string trendValueChange: "12.5%"
+    property string fontColor: "white"
+
+    FontSizer
+    {
+        id: fontsize
+    }
 
     Rectangle
     {
@@ -54,8 +60,10 @@ Item
                 Text
                 {
                     text: trendName
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
+                    color: fontColor
+                    font.pixelSize: fontsize.fontSizeLarge
                 }
             }
 
@@ -69,8 +77,10 @@ Item
                 Text
                 {
                     text: trendValue
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.top: parent.top
                     anchors.horizontalCenter: parent.horizontalCenter
+                    color: fontColor
+                    font.pixelSize: fontsize.fontSizeNormal
                 }
             }
         }
@@ -94,8 +104,10 @@ Item
                 Text
                 {
                     text: trendValueChange
-                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.bottom: parent.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
+                    color: fontColor
+                    font.pixelSize: fontsize.fontSizeSmall
                 }
             }
 

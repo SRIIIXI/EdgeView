@@ -7,19 +7,19 @@ Item
 {
     id: root
 
-    property double fontSizeNormal: fontlabel.font.pointSize
-    property double fontSizeSmall: fontlabel.font.pointSize -  2.5
-    property double fontSizeTiny: fontlabel.font.pointSize - 5.0
-    property double fontSizeBig: fontlabel.font.pointSize +  2.5
-    property double fontSizeLarge: fontlabel.font.pointSize + 5.0
+    property double fontSizeNormal: 1
+    property double fontSizeSmall: 1
+    property double fontSizeTiny: 1
+    property double fontSizeBig: 1
+    property double fontSizeLarge: 1
 
     Component.onCompleted:
     {
         fontSizeNormal = fontlabel.font.pointSize
-        fontSizeSmall = fontlabel.font.pointSize -  2.5
-        fontSizeTiny = fontlabel.font.pointSize - 5.0
-        fontSizeBig = fontlabel.font.pointSize +  2.5
-        fontSizeLarge = fontlabel.font.pointSize + 5.0
+        fontSizeSmall = fontlabel.font.pointSize * 0.85
+        fontSizeTiny = fontlabel.font.pointSize * 0.50
+        fontSizeBig = fontlabel.font.pointSize * 1.25
+        fontSizeLarge = fontlabel.font.pointSize * 1.75
     }
 
     Label
