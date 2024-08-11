@@ -10,6 +10,8 @@
 	<file>qml/CustomMenuItem.qml</file>
 	<file>qml/CustomTable.qml</file>
 	<file>qml/CustomScrollBar.qml</file>
+	<file>qml/ActionBar.qml</file>
+	<file>qml/NavigationBar.qml</file>
 
 	<file>qml/Home.qml</file>        
 	<file>qml/Devices.qml</file>

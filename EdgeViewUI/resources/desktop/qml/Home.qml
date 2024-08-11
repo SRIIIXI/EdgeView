@@ -12,14 +12,55 @@ Item
         id: background
         anchors.fill: parent
         color: applicationData.Theme.BackgroundColor
-    }
 
-    Label
-    {
-       id: dummy
-       text: "Home"
-       anchors.horizontalCenter: parent.horizontalCenter
-       anchors.verticalCenter: parent.verticalCenter
-       color: applicationData.Theme.FontColor
+        Rectangle
+        {
+            id: topLeft
+            width: parent.width*0.3
+            height: parent.height*0.5
+            anchors.top : parent.top
+            anchors.left: parent.left
+            color: "red"
+        }
+
+        Rectangle
+        {
+            id: topCentre
+            width: parent.width*0.4
+            height: parent.height*0.5
+            anchors.top : parent.top
+            anchors.left: topLeft.right
+            color: "blue"
+        }
+
+        Rectangle
+        {
+            id: topRight
+            width: parent.width*0.3
+            height: parent.height*0.5
+            anchors.top : parent.top
+            anchors.left: topCentre.right
+            color: "green"
+        }
+
+        Rectangle
+        {
+            id: bottomLeft
+            width: parent.width*0.5
+            height: parent.height*0.5
+            anchors.bottom : parent.bottom
+            anchors.left: parent.left
+            color: "orange"
+        }
+
+        Rectangle
+        {
+            id: bottomRight
+            width: parent.width*0.5
+            height: parent.height*0.5
+            anchors.bottom : parent.bottom
+            anchors.right: parent.right
+            color: "yellow"
+        }
     }
 }
