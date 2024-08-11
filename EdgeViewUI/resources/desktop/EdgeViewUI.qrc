@@ -5,6 +5,10 @@
 	<file>qml/MainWindow.qml</file>
 	<file>qml/About.qml</file>
 
+	<file>qml/CircularProgressBar.qml</file>
+	<file>qml/CustomDatePicker.qml</file>
+	<file>qml/CustomBarChart.qml</file>
+	<file>qml/CustomLineChart.qml</file>
 	<file>qml/CustomButton.qml</file>
 	<file>qml/CustomRoundButton.qml</file>
 	<file>qml/CustomMenuItem.qml</file>

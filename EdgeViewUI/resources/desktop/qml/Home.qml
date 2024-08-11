@@ -30,7 +30,17 @@ Item
             height: parent.height*0.5
             anchors.top : parent.top
             anchors.left: topLeft.right
-            color: "blue"
+            color: applicationData.Theme.BackgroundColor
+
+            CircularProgressBar
+            {
+                anchors.fill: parent
+                size: topCentre.width*0.85
+                lineWidth: topCentre.width*0.075
+                value: 50
+                primaryColor: applicationData.Theme.AccentColor
+                secondaryColor: applicationData.Theme.AccentLowColor
+            }
         }
 
         Rectangle
