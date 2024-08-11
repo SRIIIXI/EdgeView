@@ -4,7 +4,8 @@
 	<file>qml/Header.qml</file>
 	<file>qml/MainWindow.qml</file>
 	<file>qml/About.qml</file>
-
+	<file>qml/FontSizer.qml</file>
+	
 	<file>qml/CircularProgressBar.qml</file>
 	<file>qml/CustomDatePicker.qml</file>
 	<file>qml/CustomBarChart.qml</file>
@@ -16,7 +17,11 @@
 	<file>qml/CustomScrollBar.qml</file>
 	<file>qml/ActionBar.qml</file>
 	<file>qml/NavigationBar.qml</file>
-
+	<file>qml/UpIndicator.qml</file>
+	<file>qml/DownIndicator.qml</file>
+	<file>qml/CustomCard.qml</file>
+	<file>qml/CustomTrendCard.qml</file>
+	
 	<file>qml/Home.qml</file>        
 	<file>qml/Devices.qml</file>
 	<file>qml/DeviceForm.qml</file>
@@ -85,7 +90,8 @@
 	<file>images/Pass.png</file>
 	<file>images/Fail.png</file>
 	<file>images/Done.png</file>
-
+	<file>images/Bandwidth.png</file>
+	
 	<file>images/EdgeView.png</file>
 	<file>images/SampleUser.png</file>
     </qresource>

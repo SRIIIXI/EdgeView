@@ -13,25 +13,9 @@ Rectangle
 
     property string headerTitle: ""
 
-    property double fontSizeNormal: fontlabel.font.pointSize
-    property double fontSizeSmall: fontlabel.font.pointSize -  2.5
-    property double fontSizeTiny: fontlabel.font.pointSize - 5.0
-    property double fontSizeBig: fontlabel.font.pointSize +  2.5
-    property double fontSizeLarge: fontlabel.font.pointSize + 5.0
-
-    Component.onCompleted:
+    FontSizer
     {
-        fontSizeNormal = fontlabel.font.pointSize
-        fontSizeSmall = fontlabel.font.pointSize -  2.5
-        fontSizeTiny = fontlabel.font.pointSize - 5.0
-        fontSizeBig = fontlabel.font.pointSize +  2.5
-        fontSizeLarge = fontlabel.font.pointSize + 5.0
-    }
-
-    Label
-    {
-        id: fontlabel
-        text: ""
+        id: fontsizer
     }
 
     Label
@@ -44,7 +28,7 @@ Rectangle
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
         anchors.leftMargin: 20
-        font.pointSize: fontSizeLarge
+        font.pointSize: fontsizer.fontSizeLarge
     }
 
     ToolButton

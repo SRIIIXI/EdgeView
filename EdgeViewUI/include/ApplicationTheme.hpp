@@ -25,6 +25,8 @@ public:
 public:
     QString NavigationBarColor_;
 public:
+    QString StandoutColor_;
+public:
     uint32_t BarHeight_;
 public:
     Q_PROPERTY(bool IsDarkMode MEMBER IsDarkMode_)
@@ -35,6 +37,7 @@ public:
     Q_PROPERTY(QString ControlColor MEMBER ControlColor_)
     Q_PROPERTY(QString ControlLowColor MEMBER ControlLowColor_)
     Q_PROPERTY(QString NavigationBarColor MEMBER NavigationBarColor_)
+    Q_PROPERTY(QString StandoutColor MEMBER StandoutColor_)
     Q_PROPERTY(uint32_t BarHeight MEMBER BarHeight_)
 
 public:
@@ -56,6 +59,7 @@ public:
                      QString iControlColor,
                      QString iControlLowColor,
                      QString iNavigationBarColor,
+                     QString iStandoutColor,
                      uint32_t iBarHeight)
     {
         IsDarkMode_ = iIsDarkMode;
@@ -66,6 +70,7 @@ public:
         ControlColor_ = iControlColor;
         ControlLowColor_ = iControlLowColor;
         NavigationBarColor_ = iNavigationBarColor;
+        StandoutColor_ = iStandoutColor;
         BarHeight_ = iBarHeight;
     }
 
@@ -79,6 +84,7 @@ public:
         ControlColor_ = other.ControlColor_;
         ControlLowColor_ = other.ControlLowColor_;
         NavigationBarColor_ = other.NavigationBarColor_;
+        StandoutColor_ = other.StandoutColor_;
         BarHeight_ = other.BarHeight_;
     }
 
@@ -92,6 +98,7 @@ public:
         ControlColor_ = other.ControlColor_;
         ControlLowColor_ = other.ControlLowColor_;
         NavigationBarColor_ = other.NavigationBarColor_;
+        StandoutColor_ = other.StandoutColor_;
         BarHeight_ = other.BarHeight_;
         return *this;
     }
@@ -101,11 +108,12 @@ public:
         IsDarkMode_ = true;
         FontColor_ = "#ffffff";
         AccentColor_ = "#1e90ff";
-        AccentLowColor_ = "#00bfff";
+        AccentLowColor_ = "#191970";
         BackgroundColor_ = "#202020";
         ControlColor_ = "#2b2b2b";
         ControlLowColor_ = "#2e2e2e";
         NavigationBarColor_ = "#1C2833";
+        StandoutColor_ = "#ff8c00";
         BarHeight_ = 45;
     }
 
@@ -114,11 +122,12 @@ public:
         IsDarkMode_ = false;
         FontColor_ = "#000000";
         AccentColor_ = "#1e90ff";
-        AccentLowColor_ = "#00bfff";
+        AccentLowColor_ = "#191970";
         BackgroundColor_ = "#ffffff";
         ControlColor_ = "#ebedef";
         ControlLowColor_ = "#f4f6f6";
         NavigationBarColor_ = "#d4e6f1";
+        StandoutColor_ = "#ff8c00";
         BarHeight_ = 45;
     }
 };

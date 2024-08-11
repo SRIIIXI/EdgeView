@@ -10,6 +10,7 @@ Item
 
     property color primaryColor: "darkgrey"
     property color secondaryColor: "#e0e0e0"
+    property string title: "NA"
 
     property int animationDuration: 1000
 
@@ -26,6 +27,24 @@ Item
     onValueChange:
     {
         canvas.degree = (value * 360)/100;
+    }
+
+    Text
+    {
+        id: progressValue
+        text: value + " %"
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: applicationData.Theme.FontColor
+    }
+
+    Text
+    {
+        id: progressTitle
+        text: title
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: applicationData.Theme.FontColor
     }
 
     Canvas

@@ -54,91 +54,67 @@ Item
     height: 500 // default size
 
     Text
-    { // title
+    {
         text: title
         anchors.horizontalCenter: parent.horizontalCenter
-        font.pixelSize: 0.03 * factor
-        color:
-        {
-            if(applicationData.IsDarkTheme === true)
-            {
-                return "white";
-            }
-            else
-            {
-                return "black";
-            }
-        }
+        color: applicationData.Theme.FontColor
+        anchors.bottom: parent.bottom
     }
 
     Text
-    { // y label
+    {
         text: yLabel
         font.pixelSize: 0.03 * factor
         y: 0.5 * (2 * plot.y + plot.height + width)
         rotation: -90
         transformOrigin: Item.TopLeft
-        color:
-        {
-            if(applicationData.IsDarkTheme === true)
-            {
-                return "white";
-            }
-            else
-            {
-                return "black";
-            }
-        }
+        color: applicationData.Theme.FontColor
     }
-
-    /*
-    Text
-    { // x label
-        text: xLabel
-        font.pixelSize: 0.03 * factor
-        anchors
-        {
-            bottom: parent.bottom;
-            topMargin: 50
-            horizontalCenter: plot.horizontalCenter
-        }
-        color:
-        {
-            if(applicationData.IsDarkTheme === true)
-            {
-                return "white";
-            }
-            else
-            {
-                return "black";
-            }
-        }
-    }
-    */
 
     Item
-    { // plot
+    {
         id: plot
 
         Rectangle
         {
             anchors.fill: parent
             color:"transparent"
-            border.width: 1
-            border.color:
-            {
-                if(points.length < 1)
-                {
-                    return "transparent"
-                }
 
-                if(applicationData.IsDarkTheme === true)
+            Rectangle
+            {
+                height: 1
+                width: parent.width
+                anchors.bottom: parent.bottom
+                border.width: 1
+                border.color:
                 {
-                    return "white";
+                    if(points.length < 1)
+                    {
+                        return "transparent"
+                    }
+                    else
+                    {
+                        return applicationData.Theme.FontColor
+                    }
                 }
-                else
+            }
+
+            Rectangle
+            {
+                height: parent.height
+                width: 1
+                anchors.left: parent.left
+                border.width: 1
+                border.color:
                 {
-                    return "black";
+                    if(points.length < 1)
+                    {
+                        return "transparent"
+                    }
+                    else
+                    {
+                        return applicationData.Theme.FontColor
+                    }
                 }
             }
         }
@@ -146,8 +122,8 @@ Item
         anchors
         {
             fill: parent;
-            topMargin: 0.05 * factor;
-            bottomMargin: (0.015 * xMaximum + 0.05) * factor;
+            topMargin: 0
+            bottomMargin: (0.05 * xMaximum + 0.05) * factor;
             leftMargin: 0.15 * factor;
             rightMargin: 0.05 * factor
         }
@@ -160,19 +136,10 @@ Item
             {
                 property double value: index * yInterval + yMinimum
                 y: -toYPixels(value) + plot.height
-                width: plot.width;
+                width: plot.width*0.95;
                 height: 1
-                color:
-                {
-                    if(applicationData.IsDarkTheme === true)
-                    {
-                        return "white";
-                    }
-                    else
-                    {
-                        return "black";
-                    }
-                }
+                color: "transparent"
+
                 Text
                 {
                     text: parent.value
@@ -183,17 +150,7 @@ Item
                         margins: 0.01 * factor
                     }
                     font.pixelSize: 0.03 * factor
-                    color:
-                    {
-                        if(applicationData.IsDarkTheme === true)
-                        {
-                            return "white";
-                        }
-                        else
-                        {
-                            return "black";
-                        }
-                    }
+                    color: applicationData.Theme.FontColor
                 }
             }
         }
@@ -211,6 +168,7 @@ Item
                 Rectangle
                 { // bar
                     id: bar1
+                    anchors.leftMargin: 5
                     anchors
                     {
                         left: parent.left
@@ -249,17 +207,7 @@ Item
                     rotation: -90
                     transformOrigin: Item.TopLeft
                     font.pixelSize: 0.03 * factor
-                    color:
-                    {
-                        if(applicationData.IsDarkTheme === true)
-                        {
-                            return "white";
-                        }
-                        else
-                        {
-                            return "black";
-                        }
-                    }
+                    color: applicationData.Theme.FontColor
                 }
             }
         }
