@@ -146,7 +146,7 @@ Item
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 title:  'Monitored Device'
-                yLabel: 'position (degrees)'
+                yLabel: 'Temperature ( celcius )'
                 xLabel: 'time (s)'
                 color1: applicationData.Theme.AccentColor
                 color2: applicationData.Theme.StandoutColor
